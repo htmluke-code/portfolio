@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luciano Silva — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --ink:#20241F;
+    --blue:#233A5E;
+    --amber:#C97A2B;
+    --line:#20241F33;
+    --font-serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#191C17; --ink:#EDEAE1; --blue:#9FB4D8; --amber:#E29A4D; --line:#EDEAE133;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#191C17; --ink:#EDEAE1; --blue:#9FB4D8; --amber:#E29A4D; --line:#EDEAE133;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-serif); line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:64px 24px 96px;}
+  header{margin-bottom:56px;}
+  .kicker{
+    font-family:var(--font-mono); font-size:13px; color:var(--blue);
+    letter-spacing:.02em; margin:0 0 6px;
+  }
+  h1{
+    font-size:clamp(36px,6vw,52px); font-weight:700; margin:0 0 10px; line-height:1.05;
+  }
+  .role{font-size:19px; color:var(--ink); opacity:.82; margin:0 0 22px; max-width:52ch;}
+  .contact{
+    font-family:var(--font-mono); font-size:13.5px; color:var(--ink); opacity:.75;
+    display:flex; flex-wrap:wrap; gap:4px 18px; border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .contact a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line);}
+  .contact a:hover{border-color:var(--amber); color:var(--amber);}
+
+  section{margin-bottom:48px;}
+  h2{
+    font-family:var(--font-mono); font-size:13px; font-weight:500; color:var(--amber);
+    text-transform:lowercase; letter-spacing:.02em; margin:0 0 18px;
+    display:flex; align-items:baseline; gap:12px;
+  }
+  h2::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  p{margin:0 0 14px; max-width:60ch;}
+  .about p{font-size:17px;}
+
+  .entry{margin-bottom:26px; padding-left:18px; border-left:2px solid var(--line);}
+  .entry:last-child{margin-bottom:0;}
+  .entry-head{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:6px;}
+  .entry-title{font-weight:600; font-size:17px;}
+  .entry-org{font-size:15px; opacity:.75;}
+  .entry-date{font-family:var(--font-mono); font-size:12.5px; opacity:.65; white-space:nowrap; padding-top:3px;}
+  .entry ul{margin:8px 0 0; padding-left:18px;}
+  .entry li{margin-bottom:6px; font-size:15.5px;}
+  .entry p{font-size:15.5px;}
+
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px 24px;}
+  .skills-grid div{font-size:15px; padding:9px 0; border-bottom:1px solid var(--line);}
+  @media(max-width:520px){.skills-grid{grid-template-columns:1fr;}}
+
+  .meta-row{display:flex; gap:32px; flex-wrap:wrap;}
+  .meta-row .col{flex:1; min-width:180px;}
+  .meta-label{font-family:var(--font-mono); font-size:11.5px; opacity:.6; margin-bottom:4px;}
+  .meta-value{font-size:15.5px;}
+
+  footer{margin-top:64px; padding-top:20px; border-top:1px solid var(--line); font-family:var(--font-mono); font-size:12px; opacity:.55;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">portfólio</p>
+    <h1>Luciano Silva</h1>
+    <p class="role">Graduando em Análise e Desenvolvimento de Sistemas, atuando com ensino de programação e robótica educacional em Curitiba/PR.</p>
+    <div class="contact">
+      <a href="mailto:wowkillaz007@gmail.com">wowkillaz007@gmail.com</a>
+      <span>+55 41 99518-0563</span>
+      <span>Boqueirão, Curitiba/PR</span>
+    </div>
+  </header>
+
+  <section class="about">
+    <h2>sobre</h2>
+    <p>Sou graduando em Análise e Desenvolvimento de Sistemas na PUCPR e atuo como estagiário de tecnologia na Escola Sagrado Coração, em Curitiba, aplicando aulas de programação (C++ e programação em blocos) e orientando alunos do Ensino Fundamental e Médio em projetos de robótica com Arduino, Micro:bit e Meta Quest 2.</p>
+    <p>Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco oportunidades de estágio na área de desenvolvimento de sistemas para aplicar na prática o que aprendo em sala de aula e continuar evoluindo profissionalmente.</p>
+  </section>
+
+  <section>
+    <h2>experiência</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <div class="entry-title">Estagiário de Tecnologia</div>
+          <div class="entry-org">Escola Sagrado Coração, Curitiba/PR</div>
+        </div>
+        <div class="entry-date">desde fev. 2026</div>
+      </div>
+      <ul>
+        <li>Aplicação de aulas de tecnologia e programação (lógica, C++ e programação em blocos) para turmas do Ensino Fundamental e Médio.</li>
+        <li>Desenvolvimento de projetos para feira de robótica, incluindo montagem de robôs quadrúpedes e programação de sua movimentação.</li>
+        <li>Utilização de plataformas de programação com Micro:bit, Arduino e Meta Quest 2 (realidade virtual) nas aulas práticas.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>projetos</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <div class="entry-title">Feira de Robótica</div>
+          <div class="entry-org">Escola Sagrado Coração</div>
+        </div>
+        <div class="entry-date">2026</div>
+      </div>
+      <p>Orientação de alunos do Ensino Fundamental e Médio no desenvolvimento de robôs quadrúpedes com Arduino e Micro:bit, incluindo a programação da movimentação (locomoção), para participação em feira de robótica escolar.</p>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <div class="entry-title">Aulas de Programação com Realidade Virtual</div>
+        </div>
+        <div class="entry-date">2026</div>
+      </div>
+      <p>Aplicação de aulas de programação utilizando o Meta Quest 2 como ferramenta de imersão em realidade virtual, aproximando os alunos de conceitos de tecnologia de forma prática e interativa.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>formação</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <div class="entry-title">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
+          <div class="entry-org">Pontifícia Universidade Católica do Paraná – PUCPR</div>
+        </div>
+        <div class="entry-date">conclusão prev. 06/2028</div>
+      </div>
+      <p>Conhecimentos em formação: Raciocínio Computacional e Lógica, Desenvolvimento Web Front-End, Experiência Criativa e Organização de Computadores.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>habilidades</h2>
+    <div class="skills-grid">
+      <div>Programação em C++</div>
+      <div>Realidade Virtual (Meta Quest 2)</div>
+      <div>Programação em Blocos</div>
+      <div>Didática e Ensino de Tecnologia</div>
+      <div>Lógica de Programação</div>
+      <div>Trabalho em Equipe e Proatividade</div>
+      <div>Robótica Educacional (Arduino, Micro:bit)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>licenças &amp; certificações</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <div class="entry-title">DIA ANEC PR 2026</div>
+          <div class="entry-org">Associação Nacional de Educação Católica do Brasil (ANEC)</div>
+        </div>
+        <div class="entry-date">março de 2026</div>
+      </div>
+      <p>Certificado de participação, carga horária de 4h, realizado em Curitiba/PR.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="meta-row">
+      <div class="col">
+        <div class="meta-label">idiomas</div>
+        <div class="meta-value">Português — Nativo<br>Inglês — Intermediário</div>
+      </div>
+      <div class="col">
+        <div class="meta-label">interesses</div>
+        <div class="meta-value">Tecnologia e games, vôlei — interesses que unem raciocínio lógico, trabalho em equipe e disciplina.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>atualizado em setembro de 2026</footer>
+
+</div>
+</body>
+</html>
