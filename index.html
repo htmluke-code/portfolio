@@ -71,7 +71,8 @@
   .entry p{font-size:15.5px;}
 
   .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px 24px;}
-  .skills-grid div{font-size:15px; padding:9px 0; border-bottom:1px solid var(--line);}
+  .skills-col > .meta-label{margin-bottom:2px; color:var(--blue); opacity:1;}
+  .skills-col div:not(.meta-label){font-size:15px; padding:9px 0; border-bottom:1px solid var(--line);}
   @media(max-width:520px){.skills-grid{grid-template-columns:1fr;}}
 
   .meta-row{display:flex; gap:32px; flex-wrap:wrap;}
@@ -88,7 +89,7 @@
   <header>
     <p class="kicker">portfólio</p>
     <h1>Luciano Silva</h1>
-    <p class="role">Graduando em Análise e Desenvolvimento de Sistemas, atuando com ensino de programação e robótica educacional em Curitiba/PR.</p>
+    <p class="role">Graduando em Análise e Desenvolvimento de Sistemas, estudando desenvolvimento web e buscando estágio na área.</p>
     <div class="contact">
       <a href="mailto:wowkillaz007@gmail.com">wowkillaz007@gmail.com</a>
       <span>+55 41 99518-0563</span>
@@ -98,8 +99,8 @@
 
   <section class="about">
     <h2>sobre</h2>
-    <p>Sou graduando em Análise e Desenvolvimento de Sistemas na PUCPR e atuo como estagiário de tecnologia na Escola Sagrado Coração, em Curitiba, aplicando aulas de programação (C++ e programação em blocos) e orientando alunos do Ensino Fundamental e Médio em projetos de robótica com Arduino, Micro:bit e Meta Quest 2.</p>
-    <p>Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco oportunidades de estágio na área de desenvolvimento de sistemas para aplicar na prática o que aprendo em sala de aula e continuar evoluindo profissionalmente.</p>
+    <p>Sou graduando do 1º semestre de Análise e Desenvolvimento de Sistemas na Universidade Positivo, em formação em lógica de programação e desenvolvimento web front-end (HTML, CSS e JavaScript), com noções iniciais de SQL.</p>
+    <p>Atuo como estagiário de tecnologia em uma instituição de ensino, ensinando lógica de programação e C++ a alunos do Ensino Fundamental e Médio, o que desenvolve minha comunicação e a clareza ao explicar problemas técnicos. Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco estágio em desenvolvimento de sistemas para aplicar na prática o que estudo e evoluir profissionalmente.</p>
   </section>
 
   <section>
@@ -108,14 +109,14 @@
       <div class="entry-head">
         <div>
           <div class="entry-title">Estagiário de Tecnologia</div>
-          <div class="entry-org">Escola Sagrado Coração, Curitiba/PR</div>
+          <div class="entry-org">Instituição de ensino, Curitiba/PR</div>
         </div>
         <div class="entry-date">desde fev. 2026</div>
       </div>
       <ul>
-        <li>Aplicação de aulas de tecnologia e programação (lógica, C++ e programação em blocos) para turmas do Ensino Fundamental e Médio.</li>
-        <li>Desenvolvimento de projetos para feira de robótica, incluindo montagem de robôs quadrúpedes e programação de sua movimentação.</li>
-        <li>Utilização de plataformas de programação com Micro:bit, Arduino e Meta Quest 2 (realidade virtual) nas aulas práticas.</li>
+        <li>Ministro aulas de lógica de programação e C++ para turmas do Ensino Fundamental e Médio, adaptando a explicação de cada conceito ao nível dos alunos.</li>
+        <li>Oriento os alunos em atividades práticas de programação, ajudando a testar o código, encontrar erros e corrigi-los.</li>
+        <li>Apoio projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
       </ul>
     </div>
   </section>
@@ -125,21 +126,11 @@
     <div class="entry">
       <div class="entry-head">
         <div>
-          <div class="entry-title">Feira de Robótica</div>
-          <div class="entry-org">Escola Sagrado Coração</div>
+          <div class="entry-title">Robótica e Tecnologia Educacional</div>
         </div>
         <div class="entry-date">2026</div>
       </div>
-      <p>Orientação de alunos do Ensino Fundamental e Médio no desenvolvimento de robôs quadrúpedes com Arduino e Micro:bit, incluindo a programação da movimentação (locomoção), para participação em feira de robótica escolar.</p>
-    </div>
-    <div class="entry">
-      <div class="entry-head">
-        <div>
-          <div class="entry-title">Aulas de Programação com Realidade Virtual</div>
-        </div>
-        <div class="entry-date">2026</div>
-      </div>
-      <p>Aplicação de aulas de programação utilizando o Meta Quest 2 como ferramenta de imersão em realidade virtual, aproximando os alunos de conceitos de tecnologia de forma prática e interativa.</p>
+      <p>Orientação de alunos em projetos de robótica com Arduino e Micro:bit, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
     </div>
   </section>
 
@@ -153,20 +144,28 @@
         </div>
         <div class="entry-date">conclusão prev. 06/2028</div>
       </div>
-      <p>Conhecimentos em formação: Raciocínio Computacional e Lógica, Desenvolvimento Web Front-End, Experiência Criativa e Organização de Computadores.</p>
+      <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End (HTML, CSS e JavaScript).</p>
     </div>
   </section>
 
   <section>
     <h2>habilidades</h2>
     <div class="skills-grid">
-      <div>Programação em C++</div>
-      <div>Realidade Virtual (Meta Quest 2)</div>
-      <div>Programação em Blocos</div>
-      <div>Didática e Ensino de Tecnologia</div>
-      <div>Lógica de Programação</div>
-      <div>Trabalho em Equipe e Proatividade</div>
-      <div>Robótica Educacional (Arduino, Micro:bit)</div>
+      <div class="skills-col">
+        <div class="meta-label">desenvolvimento</div>
+        <div>Lógica de Programação</div>
+        <div>C++</div>
+        <div>HTML e CSS (em aprendizado)</div>
+        <div>JavaScript (em aprendizado)</div>
+        <div>SQL (noções básicas)</div>
+      </div>
+      <div class="skills-col">
+        <div class="meta-label">complementares</div>
+        <div>Didática e comunicação</div>
+        <div>Trabalho em equipe e proatividade</div>
+        <div>Robótica educacional (Arduino, Micro:bit)</div>
+        <div>Realidade virtual (Meta Quest 2)</div>
+      </div>
     </div>
   </section>
 
