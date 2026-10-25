@@ -4,200 +4,560 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luciano Silva — Portfólio</title>
+<meta name="description" content="Portfólio de Luciano Silva, estudante de Análise e Desenvolvimento de Sistemas em busca de estágio, trabalhos autônomos e contratos por período em TI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F6F3EC;
-    --ink:#20241F;
-    --blue:#233A5E;
-    --amber:#C97A2B;
-    --line:#20241F33;
-    --font-serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
-    --font-mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#191C17; --ink:#EDEAE1; --blue:#9FB4D8; --amber:#E29A4D; --line:#EDEAE133;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#191C17; --ink:#EDEAE1; --blue:#9FB4D8; --amber:#E29A4D; --line:#EDEAE133;
+    --bg:#05070d;
+    --ink:#D9E0EE;
+    --muted:#8F9BB5;
+    --blue:#A9BEF0;
+    --cyan:#9FD8CE;
+    --amber:#E4C99C;
+    --line:rgba(255,255,255,.10);
+    --font:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono:var(--font);
+    --w:min(560px, 84vw);
+    --h:min(560px, 68vh);
   }
   *{box-sizing:border-box;}
+  html,body{height:100%;}
   body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:var(--font-serif); line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--bg); color:var(--ink); font-family:var(--font);
+    line-height:1.55; overflow:hidden; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:680px; margin:0 auto; padding:64px 24px 96px;}
-  header{margin-bottom:56px;}
-  .kicker{
-    font-family:var(--font-mono); font-size:13px; color:var(--blue);
-    letter-spacing:.02em; margin:0 0 6px;
+  #bg{position:fixed; inset:0; width:100%; height:100%; z-index:0;}
+  .glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(60vw 50vh at 20% 15%, rgba(169,190,240,.12), transparent 60%),
+      radial-gradient(50vw 45vh at 85% 85%, rgba(159,216,206,.09), transparent 60%),
+      radial-gradient(40vw 40vh at 70% 10%, rgba(228,201,156,.06), transparent 60%);
   }
-  h1{
-    font-size:clamp(36px,6vw,52px); font-weight:700; margin:0 0 10px; line-height:1.05;
+
+  /* ===== BOAS-VINDAS ===== */
+  #welcome{position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; text-align:center;}
+  .door{
+    position:absolute; top:0; bottom:0; width:50.2%; z-index:1;
+    background:rgba(5,8,16,.34);
+    transition:transform 1.1s cubic-bezier(.77,0,.18,1);
   }
-  .role{font-size:19px; color:var(--ink); opacity:.82; margin:0 0 22px; max-width:52ch;}
-  .contact{
-    font-family:var(--font-mono); font-size:13.5px; color:var(--ink); opacity:.75;
-    display:flex; flex-wrap:wrap; gap:4px 18px; border-top:1px solid var(--line);
-    padding-top:14px;
+  .door.l{left:0; border-right:1px solid var(--line);}
+  .door.r{right:0; border-left:1px solid var(--line);}
+  #welcome.open .door.l{transform:translateX(-101%);}
+  #welcome.open .door.r{transform:translateX(101%);}
+  .w-content{position:relative; z-index:2; padding:24px; transition:opacity .5s ease, transform .8s ease;}
+  #welcome.open .w-content{opacity:0; transform:scale(1.08);}
+  .w-seja{
+    font-family:var(--mono); font-size:clamp(14px,2.4vw,20px); letter-spacing:.7em; text-indent:.7em;
+    color:var(--ink); margin:0 0 10px; opacity:0; animation:rise .9s .2s forwards;
   }
-  .contact a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line);}
-  .contact a:hover{border-color:var(--amber); color:var(--amber);}
-
-  section{margin-bottom:48px;}
-  h2{
-    font-family:var(--font-mono); font-size:13px; font-weight:500; color:var(--amber);
-    text-transform:lowercase; letter-spacing:.02em; margin:0 0 18px;
-    display:flex; align-items:baseline; gap:12px;
+  .w-title{
+    font-size:clamp(38px,9.6vw,116px); font-weight:600; line-height:1.05; margin:0; letter-spacing:.01em;
+    color:var(--ink); opacity:0; animation:rise 1s .45s forwards; cursor:default; user-select:none;
   }
-  h2::after{content:""; flex:1; height:1px; background:var(--line);}
+  .ch{display:inline-block; will-change:transform; white-space:pre;}
+  .w-sub{
+    font-family:var(--mono); font-size:clamp(12px,1.5vw,14px); color:var(--muted); margin:20px 0 34px;
+    letter-spacing:.34em; text-indent:.34em; text-transform:uppercase;
+    opacity:0; animation:rise 1s .8s forwards;
+  }
+  .w-btn{
+    position:relative; display:inline-flex; align-items:center; gap:16px; overflow:hidden; margin-top:44px;
+    font-family:var(--mono); font-size:11.5px; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--ink); cursor:pointer; padding:7px 7px 7px 22px; border-radius:999px;
+    border:1px solid rgba(169,190,240,.32); background:rgba(255,255,255,.025);
+    transition:border-color .4s, box-shadow .4s;
+    opacity:0; animation:rise 1s 1.1s forwards;
+  }
+  .w-btn::before{
+    content:""; position:absolute; inset:0; z-index:0;
+    background:rgba(169,190,240,.22);
+    transform:translateX(-101%); transition:transform .6s cubic-bezier(.22,.9,.26,1);
+  }
+  .w-btn:hover::before, .w-btn:focus-visible::before{transform:none;}
+  .w-btn:hover, .w-btn:focus-visible{border-color:rgba(169,190,240,.7); box-shadow:0 0 28px rgba(169,190,240,.15); outline:none;}
+  .w-btn-t, .w-btn-a{position:relative; z-index:1;}
+  .w-btn-a{
+    width:30px; height:30px; border-radius:50%; display:grid; place-items:center;
+    border:1px solid rgba(228,234,246,.35); transition:background .4s, border-color .4s;
+  }
+  .w-btn-a svg{transition:transform .4s cubic-bezier(.22,.9,.26,1);}
+  .w-btn:hover .w-btn-a{background:rgba(228,234,246,.16); border-color:rgba(228,234,246,.7);}
+  .w-btn:hover .w-btn-a svg{transform:translateX(2px);}
+  .w-hint{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:18px; opacity:0; animation:rise 1s 1.4s forwards;}
+  @keyframes rise{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(110,160,255,.45);} 50%{box-shadow:0 0 0 14px rgba(110,160,255,0);}}
 
-  p{margin:0 0 14px; max-width:60ch;}
-  .about p{font-size:17px;}
+  /* ===== APP ===== */
+  #app{position:fixed; inset:0; z-index:5; opacity:0; transition:opacity .9s .5s ease;}
+  #app.on{opacity:1;}
+  .top{
+    position:absolute; top:0; left:0; right:0; padding:20px 28px; display:flex; justify-content:space-between; align-items:center; z-index:10;
+  }
+  .brand{font-weight:700; font-size:15px; letter-spacing:.02em;}
+  .brand span{color:var(--cyan);}
+  .counter{font-family:var(--mono); font-size:12.5px; color:var(--muted);}
+  .counter b{color:var(--ink); font-weight:500;}
 
-  .entry{margin-bottom:26px; padding-left:18px; border-left:2px solid var(--line);}
-  .entry:last-child{margin-bottom:0;}
-  .entry-head{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:6px;}
-  .entry-title{font-weight:600; font-size:17px;}
-  .entry-org{font-size:15px; opacity:.75;}
-  .entry-date{font-family:var(--font-mono); font-size:12.5px; opacity:.65; white-space:nowrap; padding-top:3px;}
-  .entry ul{margin:8px 0 0; padding-left:18px;}
-  .entry li{margin-bottom:6px; font-size:15.5px;}
-  .entry p{font-size:15.5px;}
+  .scene{position:absolute; inset:0; perspective:1500px; perspective-origin:50% 45%; display:flex; align-items:center; justify-content:center;}
+  .stage{
+    position:relative; width:var(--w); height:var(--h); transform-style:preserve-3d;
+    transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .25s ease-out;
+  }
+  .card{
+    position:absolute; inset:0; border-radius:22px; border:1px solid var(--line);
+    background:linear-gradient(160deg, rgba(24,34,58,.88), rgba(9,13,24,.92));
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 30px 70px rgba(0,0,0,.55);
+    transition:transform .85s cubic-bezier(.22,.9,.26,1), opacity .6s ease, filter .6s ease, box-shadow .6s ease;
+    cursor:pointer; overflow:hidden; display:flex; flex-direction:column;
+  }
+  .card.active{cursor:default; border-color:rgba(169,190,240,.35); box-shadow:0 30px 90px rgba(0,0,0,.6), 0 0 80px rgba(169,190,240,.10);}
+  .card:not(.active){filter:brightness(.5) saturate(.8);}
+  .card:not(.active):hover{filter:brightness(.75);}
+  .card::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:3px;
+    background:linear-gradient(90deg,var(--blue),var(--cyan),var(--amber)); opacity:.9;
+  }
+  .card-in{padding:34px 36px 30px; overflow-y:auto; height:100%; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.2) transparent;}
+  .card:not(.active) .card-in{overflow:hidden; pointer-events:none;}
 
-  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px 24px;}
-  .skills-col > .meta-label{margin-bottom:2px; color:var(--blue); opacity:1;}
-  .skills-col div:not(.meta-label){font-size:15px; padding:9px 0; border-bottom:1px solid var(--line);}
-  @media(max-width:520px){.skills-grid{grid-template-columns:1fr;}}
+  .tag{font-family:var(--mono); font-size:12px; color:var(--amber); text-transform:lowercase; letter-spacing:.04em; margin:0 0 14px; display:flex; gap:10px; align-items:center;}
+  .tag::after{content:""; flex:1; height:1px; background:var(--line);}
+  h1,h2,h3{margin:0;}
+  h1{font-size:clamp(32px,5.4vw,46px); font-weight:700; line-height:1.05; letter-spacing:-.02em; margin-bottom:14px;}
+  h2{font-size:clamp(22px,3.4vw,28px); font-weight:700; margin-bottom:16px; letter-spacing:-.01em;}
+  p{margin:0 0 12px; font-size:16px; line-height:1.7; color:#C9D2E6;}
+  .lead{font-size:17px; color:var(--ink);}
+  .grad{text-decoration:underline; text-decoration-color:var(--cyan); text-decoration-thickness:3px; text-underline-offset:8px;}
 
-  .meta-row{display:flex; gap:32px; flex-wrap:wrap;}
-  .meta-row .col{flex:1; min-width:180px;}
-  .meta-label{font-family:var(--font-mono); font-size:11.5px; opacity:.6; margin-bottom:4px;}
-  .meta-value{font-size:15.5px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 22px;}
+  .chip{font-family:var(--mono); font-size:12px; padding:7px 13px; border-radius:999px; border:1px solid rgba(159,216,206,.4); color:var(--cyan); background:rgba(159,216,206,.07);}
+  .links{display:flex; flex-wrap:wrap; gap:10px;}
+  .btn{
+    font-size:14px; font-weight:600; text-decoration:none; color:var(--ink); padding:11px 20px; border-radius:12px;
+    border:1px solid var(--line); background:rgba(255,255,255,.05); transition:.25s;
+  }
+  .btn:hover{border-color:var(--blue); background:rgba(169,190,240,.15); transform:translateY(-2px);}
+  .btn.primary{background:rgba(169,190,240,.2); border-color:rgba(169,190,240,.55);}
+  .btn.primary:hover{filter:brightness(1.12);}
 
-  footer{margin-top:64px; padding-top:20px; border-top:1px solid var(--line); font-family:var(--font-mono); font-size:12px; opacity:.55;}
+  .item{padding-left:16px; border-left:2px solid rgba(169,190,240,.4); margin-bottom:20px;}
+  .item h3{font-size:17px; font-weight:600;}
+  .item .org{font-size:14px; color:var(--muted);}
+  .item .date{font-family:var(--mono); font-size:12px; color:var(--amber); margin:4px 0 8px;}
+  ul{margin:8px 0 0; padding-left:18px;}
+  li{font-size:15.5px; line-height:1.65; color:#C9D2E6; margin-bottom:8px;}
+
+  .skills{display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; margin-bottom:18px;}
+  .skills h3{font-family:var(--mono); font-size:11.5px; font-weight:500; color:var(--blue); margin-bottom:6px;}
+  .skills div div{font-size:14.5px; padding:8px 0; border-bottom:1px solid var(--line); color:#CBD5EC;}
+  .meta{display:grid; grid-template-columns:1fr 1fr; gap:6px 22px;}
+  .meta h3{font-family:var(--mono); font-size:11.5px; font-weight:500; color:var(--blue); margin-bottom:4px;}
+  .meta p{font-size:14.5px;}
+
+  .contact-line{display:flex; gap:14px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); font-size:15.5px;}
+  .contact-line small{font-family:var(--mono); font-size:11.5px; color:var(--muted); width:74px; flex:none;}
+  .contact-line a{color:var(--ink); text-decoration:none; word-break:break-all;}
+  .contact-line a:hover{color:var(--cyan);}
+
+  .nav{
+    position:absolute; top:50%; z-index:10; width:50px; height:50px; border-radius:50%; cursor:pointer;
+    border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--ink); font-size:20px;
+    backdrop-filter:blur(8px); transition:.25s; transform:translateY(-50%);
+  }
+  .nav:hover{background:rgba(169,190,240,.22); border-color:var(--blue);}
+  .nav:disabled{opacity:.25; cursor:default;}
+  .nav.prev{left:clamp(10px,3vw,40px);}
+  .nav.next{right:clamp(10px,3vw,40px);}
+
+  .bottom{position:absolute; bottom:22px; left:0; right:0; z-index:10; display:flex; flex-direction:column; align-items:center; gap:12px;}
+  .dots{display:flex; gap:9px;}
+  .dot{width:9px; height:9px; border-radius:99px; border:none; padding:0; cursor:pointer; background:rgba(255,255,255,.25); transition:.35s;}
+  .dot.on{width:30px; background:var(--blue);}
+  .hint{font-family:var(--mono); font-size:11.5px; color:var(--muted);}
+
+  @media (max-width:640px){
+    .top{padding:16px 18px;}
+    .card-in{padding:28px 22px 24px;}
+    .skills,.meta{grid-template-columns:1fr;}
+    .nav{width:42px; height:42px; top:auto; bottom:62px; transform:none;}
+    .nav.prev{left:18px;} .nav.next{right:18px;}
+    .hint{display:none;}
+    :root{--h:min(560px, 66vh);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important; animation-delay:0s !important; transition-duration:.01ms !important;}
+    .w-seja,.w-title,.w-sub,.w-btn,.w-hint{opacity:1;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <p class="kicker">portfólio</p>
-    <h1>Luciano Silva</h1>
-    <p class="role">Graduando em Análise e Desenvolvimento de Sistemas, estudando desenvolvimento web e buscando estágio na área.</p>
-    <div class="contact">
-      <a href="mailto:wowkillaz007@gmail.com">wowkillaz007@gmail.com</a>
-      <span>+55 41 99518-0563</span>
-      <span>Boqueirão, Curitiba/PR</span>
-    </div>
-  </header>
+<canvas id="bg"></canvas>
+<div class="glow"></div>
 
-  <section class="about">
-    <h2>sobre</h2>
-    <p>Sou graduando do 1º semestre de Análise e Desenvolvimento de Sistemas na Universidade Positivo, em formação em lógica de programação e desenvolvimento web front-end (HTML, CSS e JavaScript), com noções iniciais de SQL.</p>
-    <p>Tenho experiência como estagiário de tecnologia em uma instituição de ensino, onde ensinei lógica de programação e C++ a alunos do Ensino Fundamental e Médio, o que desenvolveu minha comunicação e a clareza ao explicar problemas técnicos. Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco estágio em desenvolvimento de sistemas para aplicar na prática o que estudo e evoluir profissionalmente.</p>
-  </section>
-
-  <section>
-    <h2>experiência</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <div>
-          <div class="entry-title">Estagiário de Tecnologia</div>
-          <div class="entry-org">Instituição de ensino, Curitiba/PR</div>
-        </div>
-        <div class="entry-date">2026</div>
-      </div>
-      <ul>
-        <li>Ministrei aulas de lógica de programação e C++ para turmas do Ensino Fundamental e Médio, adaptando a explicação de cada conceito ao nível dos alunos.</li>
-        <li>Orientei os alunos em atividades práticas de programação, ajudando a testar o código, encontrar erros e corrigi-los.</li>
-        <li>Apoiei projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2>projetos</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <div>
-          <div class="entry-title">Robótica e Tecnologia Educacional</div>
-        </div>
-        <div class="entry-date">2026</div>
-      </div>
-      <p>Orientação de alunos em projetos de robótica com Arduino e Micro:bit, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>formação</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <div>
-          <div class="entry-title">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
-          <div class="entry-org">Universidade Positivo</div>
-        </div>
-        <div class="entry-date">conclusão prev. 06/2028</div>
-      </div>
-      <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End (HTML, CSS e JavaScript).</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>habilidades</h2>
-    <div class="skills-grid">
-      <div class="skills-col">
-        <div class="meta-label">desenvolvimento</div>
-        <div>Lógica de Programação</div>
-        <div>C++</div>
-        <div>HTML e CSS (em aprendizado)</div>
-        <div>JavaScript (em aprendizado)</div>
-        <div>SQL (noções básicas)</div>
-      </div>
-      <div class="skills-col">
-        <div class="meta-label">complementares</div>
-        <div>Didática e comunicação</div>
-        <div>Trabalho em equipe e proatividade</div>
-        <div>Robótica educacional (Arduino, Micro:bit)</div>
-        <div>Realidade virtual (Meta Quest 2)</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>licenças &amp; certificações</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <div>
-          <div class="entry-title">DIA ANEC PR 2026</div>
-          <div class="entry-org">Associação Nacional de Educação Católica do Brasil (ANEC)</div>
-        </div>
-        <div class="entry-date">março de 2026</div>
-      </div>
-      <p>Certificado de participação, carga horária de 4h, realizado em Curitiba/PR.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="meta-row">
-      <div class="col">
-        <div class="meta-label">idiomas</div>
-        <div class="meta-value">Português — Nativo<br>Inglês — Intermediário</div>
-      </div>
-      <div class="col">
-        <div class="meta-label">interesses</div>
-        <div class="meta-value">Tecnologia e games, vôlei — interesses que unem raciocínio lógico, trabalho em equipe e disciplina.</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>atualizado em setembro de 2026</footer>
-
+<!-- TELA DE BOAS-VINDAS -->
+<div id="welcome" role="dialog" aria-label="Boas-vindas">
+  <div class="door l"></div>
+  <div class="door r"></div>
+  <div class="w-content">
+    <p class="w-seja">SEJA</p>
+    <h1 class="w-title">BEM-VINDO</h1>
+    <button class="w-btn" id="enter">
+      <span class="w-btn-t">Entrar</span>
+      <span class="w-btn-a" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </button>
+    <div class="w-hint">ou pressione Enter</div>
+  </div>
 </div>
+
+<!-- PORTFÓLIO INTERATIVO -->
+<main id="app">
+  <div class="top">
+    <div class="brand">Luciano<span>.</span>Silva</div>
+    <div class="counter"><b id="cur">01</b> / <span id="tot">07</span></div>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="stage" id="stage">
+
+      <!-- 1 INÍCIO -->
+      <section class="card" data-title="Início">
+        <div class="card-in">
+          <p class="tag">início</p>
+          <h1>Olá, eu sou o <span class="grad">Luciano</span>.</h1>
+          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas, em Curitiba, em busca de oportunidades na área de TI.</p>
+          <div class="chips">
+            <span class="chip">Estágio</span>
+            <span class="chip">Trabalho autônomo</span>
+            <span class="chip">Contrato por período</span>
+          </div>
+          <div class="links">
+            <a class="btn primary" href="mailto:wowkillaz007@gmail.com">Entrar em contato</a>
+            <a class="btn" href="https://wa.me/5541995180563" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 SOBRE -->
+      <section class="card" data-title="Sobre">
+        <div class="card-in">
+          <p class="tag">sobre</p>
+          <h2>Quem sou eu</h2>
+          <p>Sou graduando do 1º semestre de Análise e Desenvolvimento de Sistemas na Universidade Positivo, em formação em lógica de programação e desenvolvimento web front-end (HTML, CSS e JavaScript), com noções iniciais de SQL.</p>
+          <p>Tenho experiência como estagiário de tecnologia em uma instituição de ensino, onde ensinei lógica de programação e C++ a alunos do Ensino Fundamental e Médio. Isso desenvolveu minha comunicação e a clareza ao explicar problemas técnicos.</p>
+          <p>Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco estágio em desenvolvimento de sistemas para aplicar na prática o que estudo e evoluir profissionalmente.</p>
+        </div>
+      </section>
+
+      <!-- 3 EXPERIÊNCIA -->
+      <section class="card" data-title="Experiência">
+        <div class="card-in">
+          <p class="tag">experiência</p>
+          <h2>Onde já atuei</h2>
+          <div class="item">
+            <h3>Estagiário de Tecnologia</h3>
+            <div class="org">Instituição de ensino, Curitiba/PR</div>
+            <div class="date">2026</div>
+            <ul>
+              <li>Ministrei aulas de lógica de programação e C++ para turmas do Ensino Fundamental e Médio, adaptando cada conceito ao nível dos alunos.</li>
+              <li>Orientei os alunos em atividades práticas de programação, ajudando a testar o código, encontrar erros e corrigi-los.</li>
+              <li>Apoiei projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 PROJETOS -->
+      <section class="card" data-title="Projetos">
+        <div class="card-in">
+          <p class="tag">projetos</p>
+          <h2>O que já construí</h2>
+          <div class="item">
+            <h3>Robótica e Tecnologia Educacional</h3>
+            <div class="date">2026</div>
+            <p>Orientação de alunos em projetos de robótica com Arduino e Micro:bit, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 FORMAÇÃO -->
+      <section class="card" data-title="Formação">
+        <div class="card-in">
+          <p class="tag">formação</p>
+          <h2>Estudos</h2>
+          <div class="item">
+            <h3>Tecnologia em Análise e Desenvolvimento de Sistemas</h3>
+            <div class="org">Universidade Positivo</div>
+            <div class="date">conclusão prevista: 06/2028</div>
+            <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End (HTML, CSS e JavaScript).</p>
+          </div>
+          <div class="item">
+            <h3>DIA ANEC PR 2026</h3>
+            <div class="org">Associação Nacional de Educação Católica do Brasil (ANEC)</div>
+            <div class="date">março de 2026</div>
+            <p>Certificado de participação, carga horária de 4h, realizado em Curitiba/PR.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 HABILIDADES -->
+      <section class="card" data-title="Habilidades">
+        <div class="card-in">
+          <p class="tag">habilidades</p>
+          <h2>O que eu sei fazer</h2>
+          <div class="skills">
+            <div>
+              <h3>desenvolvimento</h3>
+              <div>Lógica de Programação</div>
+              <div>C++</div>
+              <div>HTML e CSS (em aprendizado)</div>
+              <div>JavaScript (em aprendizado)</div>
+              <div>SQL (noções básicas)</div>
+            </div>
+            <div>
+              <h3>complementares</h3>
+              <div>Didática e comunicação</div>
+              <div>Trabalho em equipe e proatividade</div>
+              <div>Robótica educacional</div>
+              <div>Realidade virtual (Meta Quest 2)</div>
+            </div>
+          </div>
+          <div class="meta">
+            <div>
+              <h3>idiomas</h3>
+              <p>Português — Nativo<br>Inglês — Intermediário</p>
+            </div>
+            <div>
+              <h3>interesses</h3>
+              <p>Tecnologia, games e vôlei.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 CONTATO -->
+      <section class="card" data-title="Contato">
+        <div class="card-in">
+          <p class="tag">contato</p>
+          <h2>Vamos conversar?</h2>
+          <p>Aberto a estágio, trabalhos como autônomo e contratos por período.</p>
+          <div class="contact-line"><small>e-mail</small><a href="mailto:wowkillaz007@gmail.com">wowkillaz007@gmail.com</a></div>
+          <div class="contact-line"><small>whatsapp</small><a href="https://wa.me/5541995180563" target="_blank" rel="noopener">+55 41 99518-0563</a></div>
+          <div class="contact-line"><small>local</small><span>Boqueirão, Curitiba/PR</span></div>
+          <div class="links" style="margin-top:22px">
+            <a class="btn primary" href="mailto:wowkillaz007@gmail.com">Enviar e-mail</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <button class="nav prev" id="prev" aria-label="Anterior">&#8592;</button>
+  <button class="nav next" id="next" aria-label="Próximo">&#8594;</button>
+
+  <div class="bottom">
+    <div class="dots" id="dots"></div>
+    <div class="hint">use as setas, arraste ou clique nos cards laterais</div>
+  </div>
+</main>
+
+<script>
+(function(){
+  /* ---------- Fundo imersivo (partículas) ---------- */
+  var cv = document.getElementById('bg'), ctx = cv.getContext('2d');
+  var W, H, dpr, pts = [], mouse = {x:-999, y:-999};
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr;
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+    var n = Math.round(Math.min(110, innerWidth * innerHeight / 14000));
+    pts = [];
+    for (var i = 0; i < n; i++){
+      pts.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35*dpr, vy:(Math.random()-.5)*.35*dpr, r:(Math.random()*1.4+.6)*dpr});
+    }
+  }
+  addEventListener('resize', resize); resize();
+  addEventListener('pointermove', function(e){ mouse.x = e.clientX*dpr; mouse.y = e.clientY*dpr; });
+  document.documentElement.addEventListener('mouseleave', function(){ mouse.x = -999; mouse.y = -999; });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var link = 130*dpr, reach = 190*dpr;
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      var dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy), near = d < reach;
+      if (near && d > 60*dpr){ p.x += dx/d*.45*dpr; p.y += dy/d*.45*dpr; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, near ? p.r*1.5 : p.r, 0, 6.283);
+      ctx.fillStyle = near ? 'rgba(159,216,206,.95)' : 'rgba(169,190,240,.65)'; ctx.fill();
+      if (near){
+        ctx.strokeStyle = 'rgba(159,216,206,' + (.55*(1-d/reach)) + ')';
+        ctx.lineWidth = dpr*1.1;
+        ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+      }
+      for (var j = i+1; j < pts.length; j++){
+        var q = pts[j], dd = Math.hypot(p.x-q.x, p.y-q.y);
+        if (dd < link){
+          ctx.strokeStyle = 'rgba(169,190,240,' + (.2*(1-dd/link)) + ')';
+          ctx.lineWidth = dpr*.8;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+    }
+    if (mouse.x > 0){
+      ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 3*dpr, 0, 6.283);
+      ctx.fillStyle = 'rgba(210,235,230,.9)'; ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  draw();
+
+  /* ---------- Boas-vindas ---------- */
+  var welcome = document.getElementById('welcome'), app = document.getElementById('app'), opened = false;
+  function enter(){
+    if (opened) return; opened = true;
+    welcome.classList.add('open'); app.classList.add('on');
+    setTimeout(function(){ welcome.style.display = 'none'; }, 1300);
+  }
+  document.getElementById('enter').addEventListener('click', enter);
+  addEventListener('keydown', function(e){ if (!opened && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); enter(); } });
+
+  /* ---------- Letras que se dispersam ao passar o mouse ---------- */
+  function mix(a, b, t){
+    return 'rgb(' + a.map(function(v, i){ return Math.round(v + (b[i] - v) * t); }).join(',') + ')';
+  }
+  function split(el, c1, c2){
+    var txt = el.textContent, out = [];
+    el.setAttribute('aria-label', txt); el.textContent = '';
+    for (var i = 0; i < txt.length; i++){
+      var s = document.createElement('span');
+      s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.textContent = txt[i];
+      if (c1) s.style.color = mix(c1, c2, txt.length > 1 ? i / (txt.length - 1) : 0);
+      el.appendChild(s);
+      out.push({el:s, x:0, y:0, r:0, o:1, tx:0, ty:0, tr:0, to:1});
+    }
+    return out;
+  }
+  var letters = split(document.querySelector('.w-title'))
+                .concat(split(document.querySelector('.w-seja')));
+  var pm = {x:-9999, y:-9999}, RAD = 140;
+  addEventListener('pointermove', function(e){ pm.x = e.clientX; pm.y = e.clientY; });
+  function tick(){
+    if (welcome.style.display === 'none') return;
+    letters.forEach(function(L){
+      var b = L.el.getBoundingClientRect();
+      var cx = b.left + b.width / 2 - L.x, cy = b.top + b.height / 2 - L.y;
+      var dx = cx - pm.x, dy = cy - pm.y, d = Math.hypot(dx, dy) || 1;
+      if (d < RAD){
+        var f = 1 - d / RAD;
+        L.tx = dx / d * f * 90; L.ty = dy / d * f * 90 - f * 18;
+        L.tr = (dx > 0 ? 1 : -1) * f * 40; L.to = 1 - f * .65;
+      } else { L.tx = L.ty = L.tr = 0; L.to = 1; }
+      L.x += (L.tx - L.x) * .14; L.y += (L.ty - L.y) * .14;
+      L.r += (L.tr - L.r) * .14; L.o += (L.to - L.o) * .14;
+      L.el.style.transform = 'translate3d(' + L.x.toFixed(2) + 'px,' + L.y.toFixed(2) + 'px,0) rotate(' + L.r.toFixed(2) + 'deg)';
+      L.el.style.opacity = L.o.toFixed(2);
+    });
+    requestAnimationFrame(tick);
+  }
+  if (!reduce) tick();
+
+  /* ---------- Carrossel 3D ---------- */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var stage = document.getElementById('stage'), dotsEl = document.getElementById('dots');
+  var cur = 0, N = cards.length;
+  document.getElementById('tot').textContent = pad(N);
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  cards.forEach(function(c, i){
+    var b = document.createElement('button');
+    b.className = 'dot'; b.setAttribute('aria-label', c.dataset.title);
+    b.addEventListener('click', function(){ go(i); });
+    dotsEl.appendChild(b);
+    c.addEventListener('click', function(){ if (i !== cur) go(i); });
+  });
+  var dots = Array.prototype.slice.call(dotsEl.children);
+
+  function layout(){
+    var narrow = innerWidth < 640;
+    cards.forEach(function(c, i){
+      var o = i - cur, a = Math.abs(o);
+      var x = o * (narrow ? .96 : .74);
+      var z = -a * (narrow ? 180 : 210);
+      var ry = -o * (narrow ? 38 : 34);
+      c.style.transform = 'translate3d(calc(var(--w) * ' + x + '),0,' + z + 'px) rotateY(' + ry + 'deg)';
+      c.style.opacity = a > 2 ? 0 : 1;
+      c.style.pointerEvents = a > 2 ? 'none' : 'auto';
+      c.style.zIndex = 100 - a;
+      c.classList.toggle('active', o === 0);
+      if (o === 0) c.removeAttribute('inert'); else c.setAttribute('inert','');
+    });
+    dots.forEach(function(d, i){ d.classList.toggle('on', i === cur); });
+    document.getElementById('cur').textContent = pad(cur + 1);
+    document.getElementById('prev').disabled = cur === 0;
+    document.getElementById('next').disabled = cur === N - 1;
+  }
+  function go(i){
+    i = Math.max(0, Math.min(N - 1, i));
+    if (i === cur) return;
+    cards[cur].querySelector('.card-in').scrollTop = 0;
+    cur = i; layout();
+  }
+  document.getElementById('prev').addEventListener('click', function(){ go(cur - 1); });
+  document.getElementById('next').addEventListener('click', function(){ go(cur + 1); });
+  addEventListener('keydown', function(e){
+    if (!opened) return;
+    if (e.key === 'ArrowRight') go(cur + 1);
+    else if (e.key === 'ArrowLeft') go(cur - 1);
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(N - 1);
+  });
+
+  /* roda do mouse (só quando o card não está rolando) */
+  var lock = false;
+  addEventListener('wheel', function(e){
+    if (!opened || lock) return;
+    var inner = cards[cur].querySelector('.card-in');
+    var overflow = inner.scrollHeight > inner.clientHeight + 4;
+    if (overflow && e.target.closest && e.target.closest('.card.active')) return;
+    var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(d) < 18) return;
+    go(cur + (d > 0 ? 1 : -1));
+    lock = true; setTimeout(function(){ lock = false; }, 650);
+  }, {passive:true});
+
+  /* arrastar no toque */
+  var sx = null, sy = null;
+  addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  addEventListener('touchend', function(e){
+    if (sx === null || !opened) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+    sx = null;
+  }, {passive:true});
+
+  /* leve paralaxe com o mouse */
+  if (!reduce && matchMedia('(pointer:fine)').matches){
+    addEventListener('pointermove', function(e){
+      var nx = e.clientX / innerWidth - .5, ny = e.clientY / innerHeight - .5;
+      stage.style.setProperty('--ry', (nx * 7) + 'deg');
+      stage.style.setProperty('--rx', (-ny * 5) + 'deg');
+    });
+  }
+
+  addEventListener('resize', layout);
+  layout();
+})();
+</script>
 </body>
 </html>
