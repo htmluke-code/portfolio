@@ -201,25 +201,6 @@
   #welcome.open #arc{opacity:0;}
 
   /* ===== Corredor (canto inferior esquerdo) ===== */
-  .runner{position:absolute; left:22px; bottom:14px; width:64px; z-index:10; pointer-events:none;}
-  .runner svg{width:100%; height:auto; overflow:visible; display:block;}
-  .runner .ln{fill:none; stroke:var(--ink); stroke-width:3; stroke-linecap:round; stroke-linejoin:round;}
-  .runner .code{fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
-  .runner .body{fill:var(--blue); stroke:var(--ink); stroke-width:3;}
-  .runner .head{fill:var(--bg); stroke:var(--ink); stroke-width:3;}
-  .runner .eye{fill:var(--ink);}
-  .runner .ground{fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; stroke-dasharray:6 9; opacity:.35; animation:ground .55s linear infinite;}
-  .runner .bob, .runner .limb{transform-box:view-box;}
-  .runner .bob{animation:bob .275s ease-in-out infinite;}
-  .runner .l1{transform-origin:28px 44px; animation:swingA .55s ease-in-out infinite;}
-  .runner .l2{transform-origin:36px 44px; animation:swingB .55s ease-in-out infinite;}
-  .runner .a1{transform-origin:24px 30px; animation:swingB .55s ease-in-out infinite;}
-  .runner .a2{transform-origin:40px 30px; animation:swingA .55s ease-in-out infinite;}
-  @keyframes swingA{0%,100%{transform:rotate(-40deg);} 50%{transform:rotate(40deg);}}
-  @keyframes swingB{0%,100%{transform:rotate(40deg);} 50%{transform:rotate(-40deg);}}
-  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-2px);}}
-  @keyframes ground{to{stroke-dashoffset:15;}}
-
   /* ===== Tema gosma: caixa, botão, cards ===== */
   .w-box{
     background:radial-gradient(120% 90% at 18% 0%, rgba(157,192,243,.22), transparent 55%), linear-gradient(160deg,#162B52,#0C1A36);
@@ -265,27 +246,101 @@
   .nav{background:#0E1E3E; border-color:rgba(157,192,243,.4); color:#EEF4FD; backdrop-filter:none; -webkit-backdrop-filter:none;}
   .nav:hover{background:#1B3566; border-color:var(--blue);}
 
-  .goo-svg{position:absolute; left:0; right:0; width:100%; z-index:1; pointer-events:none; overflow:hidden;}
-  .goo-top{top:0; height:78px;} .goo-bot{bottom:0; height:30px;}
-  .goo-svg path{fill:#050F26;}
-  .card.active .goo-top path.t{transform-box:fill-box; transform-origin:50% 0; animation:gooSway 5.5s ease-in-out infinite alternate;}
-  @keyframes gooSway{from{transform:rotate(-2deg) scaleY(.96);} to{transform:rotate(2deg) scaleY(1.05);}}
-  @media (prefers-reduced-motion:reduce){ .goo-svg path{animation:none !important;} }
+  /* ===== Início: caixa e botão claros, tons suaves ===== */
+  .w-box{background:linear-gradient(160deg,rgba(255,255,255,.92),rgba(222,235,252,.92)); box-shadow:0 16px 44px rgba(36,69,122,.16);}
+  .w-box::before{border-color:rgba(36,69,122,.12);}
+  .w-box::after{background:linear-gradient(135deg, var(--blue), rgba(78,116,178,.55) 50%, var(--blue));}
+  .w-title{color:#2B4D86;}
+  .w-btn{background:#FFFFFF; border-color:rgba(36,69,122,.25); color:#2B4D86; box-shadow:0 8px 22px rgba(36,69,122,.14);}
+  .w-btn::before{background:rgba(157,192,243,.35);}
+  .w-btn:hover, .w-btn:focus-visible{border-color:#4E74B2; box-shadow:0 10px 28px rgba(36,69,122,.22);}
+  .w-btn-a{border-color:rgba(36,69,122,.35);}
+  .w-btn:hover .w-btn-a{background:rgba(36,69,122,.1); border-color:rgba(36,69,122,.6);}
+
+  /* ===== Cards: claros, compactos e modernos ===== */
+  :root{--w:min(500px,86vw); --h:min(520px,70vh);}
+  .card{
+    color:var(--ink); border:1px solid rgba(36,69,122,.14); border-radius:20px;
+    background:linear-gradient(180deg,#FBFDFF 0%,#EAF2FD 100%);
+    box-shadow:0 18px 46px rgba(36,69,122,.16);
+  }
+  .card.active{border-color:rgba(36,69,122,.28); box-shadow:0 26px 64px rgba(36,69,122,.24);}
+  .card::before{display:block; left:28px; right:auto; top:0; width:44px; height:4px; border-radius:0 0 4px 4px; background:var(--ink); opacity:1;}
+  .card::after{background:var(--bg); opacity:.45;}
+  .card.active::after{opacity:0;}
+  .card-in{padding:34px 30px 24px; scrollbar-color:rgba(36,69,122,.3) transparent;}
+  .card h1, .card h2, .card h3{color:#16315F;}
+  .card h1{font-size:clamp(28px,4.6vw,38px); margin-bottom:10px;}
+  .card h2{font-size:clamp(20px,3vw,24px); margin-bottom:12px;}
+  .card p, .card li{color:#34548A; font-size:14.5px; line-height:1.6;}
+  .card p{margin-bottom:9px;}
+  .card .lead{color:#16315F; font-size:16px;}
+  .tag{color:var(--ink); font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;}
+  .tag::after{background:rgba(36,69,122,.16);}
+  .item{border-left:2px solid rgba(36,69,122,.3); padding-left:14px; margin-bottom:14px;}
+  .item h3{font-size:15.5px;} .item .org{color:#4E6A9B; font-size:13px;} .item .date{color:var(--ink); font-size:11.5px; margin:3px 0 6px;}
+  li{margin-bottom:5px;}
+  .chips{margin:14px 0 16px; gap:6px;}
+  .chip{color:#16315F; border-color:rgba(36,69,122,.22); background:rgba(157,192,243,.28); font-size:11.5px; padding:6px 12px;}
+  .btn{color:#16315F; border-color:rgba(36,69,122,.22); background:#FFFFFF; font-size:13.5px; padding:10px 18px; border-radius:11px;}
+  .btn:hover{border-color:var(--ink); background:#F1F6FE;}
+  .btn.primary{background:var(--ink); border-color:var(--ink); color:#FFFFFF;}
+  .btn.primary:hover{background:#1B3866; filter:none;}
+  .skills{gap:4px 18px; margin-bottom:12px;}
+  .skills h3, .meta h3{color:var(--ink); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:600;}
+  .skills div div{color:#34548A; font-size:13.5px; padding:6px 0; border-bottom-color:rgba(36,69,122,.12);}
+  .meta p{font-size:13.5px;}
+  .contact-line{padding:11px 0; border-bottom-color:rgba(36,69,122,.12); font-size:14.5px;}
+  .contact-line small{color:#4E6A9B;} .contact-line a{color:#16315F;}
+  .grad{text-decoration-color:var(--blue);}
+  .nav{background:#FFFFFF; border-color:rgba(36,69,122,.2); color:var(--ink); box-shadow:0 6px 18px rgba(36,69,122,.14);}
+  .nav:hover{background:var(--ink); color:#FFFFFF; border-color:var(--ink);}
+
+  /* ===== Apresentação dos cards ===== */
+  .card-in{display:flex; flex-direction:column;}
+  .card-in > *{flex:none;}
+  .push{margin-top:auto; padding-top:18px;}
+  .pill{align-self:flex-start; display:inline-flex; align-items:center; gap:8px; font-size:11.5px; font-weight:600; color:#2B4D86; padding:6px 12px; border-radius:99px; background:rgba(157,192,243,.3); border:1px solid rgba(36,69,122,.16); margin-bottom:16px;}
+  .pill i{width:7px; height:7px; border-radius:50%; background:#3E8E6B; box-shadow:0 0 0 0 rgba(62,142,107,.5); animation:pulse 2s infinite;}
+  @keyframes pulse{70%{box-shadow:0 0 0 7px rgba(62,142,107,0);} 100%{box-shadow:0 0 0 0 rgba(62,142,107,0);}}
+  .chips.tight{margin:6px 0 14px;}
+  .chip.soft{background:#fff;}
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:4px;}
+  .stat{background:#fff; border:1px solid rgba(36,69,122,.12); border-radius:14px; padding:12px 12px 10px;}
+  .stat b{display:block; font-size:22px; font-weight:800; color:#2B4D86; letter-spacing:-.02em; line-height:1.1;}
+  .stat span{font-size:11.5px; color:#4E6A9B;}
+  .feats{display:flex; flex-direction:column; gap:10px; margin-top:6px;}
+  .feat{display:flex; gap:12px; background:#fff; border:1px solid rgba(36,69,122,.1); border-radius:14px; padding:12px 14px;}
+  .feat h3{font-size:14px; margin-bottom:2px;} .feat p{margin:0; font-size:13px; line-height:1.5;}
+  .ico{flex:none; width:34px; height:34px; border-radius:10px; background:rgba(157,192,243,.35); display:grid; place-items:center;}
+  .ico svg{width:18px; height:18px; fill:none; stroke:#2B4D86; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;}
+  .entry{background:#fff; border:1px solid rgba(36,69,122,.1); border-radius:16px; padding:16px 16px 12px; margin-bottom:12px;}
+  .entry-h{display:flex; justify-content:space-between; gap:10px; align-items:flex-start; margin-bottom:8px;}
+  .entry h3{font-size:15px; line-height:1.3;} .entry .org{font-size:12.5px; color:#4E6A9B; margin-top:2px;}
+  .entry p{margin-bottom:8px; font-size:13.5px;} .entry ul{margin:0 0 4px; padding-left:17px;} .entry li{font-size:13.5px;}
+  .dpill{flex:none; font-size:11px; font-weight:700; color:#2B4D86; background:rgba(157,192,243,.35); padding:4px 10px; border-radius:99px; white-space:nowrap;}
+  .sub{font-size:10.5px !important; letter-spacing:.08em; text-transform:uppercase; font-weight:600; color:#4E6A9B !important; margin-top:6px;}
+  .lang{display:grid; grid-template-columns:78px 1fr 92px; gap:10px; align-items:center; font-size:13px; margin:8px 0; color:#34548A;}
+  .lang em{font-style:normal; font-size:12px; color:#4E6A9B; text-align:right;}
+  .bar{height:6px; border-radius:9px; background:rgba(36,69,122,.12); overflow:hidden;}
+  .bar i{display:block; height:100%; border-radius:9px; background:linear-gradient(90deg,#9DC0F3,#4E74B2);}
+  .ctile{display:flex; align-items:center; gap:12px; text-decoration:none; background:#fff; border:1px solid rgba(36,69,122,.1); border-radius:14px; padding:11px 14px; margin-top:10px; transition:.25s;}
+  a.ctile:hover{border-color:#4E74B2; transform:translateY(-2px); box-shadow:0 8px 20px rgba(36,69,122,.12);}
+  .ctile small{display:block; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:#4E6A9B; font-weight:600;}
+  .ctile b{font-size:14.5px; color:#16315F; font-weight:600; word-break:break-all;}
 
   @media (max-width:640px){
     .top{padding:16px 18px;}
-    .card-in{padding:44px 22px 24px;}
+    .card-in{padding:28px 18px 18px;} .lang{grid-template-columns:66px 1fr 82px;} .stats{gap:7px;}
     .skills,.meta{grid-template-columns:1fr;}
     .nav{width:42px; height:42px; top:auto; bottom:62px; transform:none;}
     .nav.prev{left:18px;} .nav.next{right:18px;}
     .hint{display:none;}
-    .runner{width:46px; left:14px; bottom:10px;}
     :root{--h:min(560px, 66vh);}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms !important; animation-delay:0s !important; transition-duration:.01ms !important;}
     .w-seja,.w-title,.w-sub,.w-btn,.w-hint{opacity:1;}
-    .runner *{animation:none !important;}
     .w-box{opacity:1;}
   }
 </style>
@@ -324,15 +379,20 @@
       <!-- 1 INÍCIO -->
       <section class="card" data-title="Início">
         <div class="card-in">
-          <p class="tag">início</p>
+          <div class="pill"><i></i>Disponível para oportunidades</div>
           <h1>Olá, eu sou o <span class="grad">Luciano</span>.</h1>
-          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas, em Curitiba, em busca de oportunidades na área de TI.</p>
+          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas em Curitiba, em busca de oportunidades na área de TI.</p>
           <div class="chips">
             <span class="chip">Estágio</span>
             <span class="chip">Trabalho autônomo</span>
             <span class="chip">Contrato por período</span>
           </div>
-          <div class="links">
+          <div class="stats">
+            <div class="stat"><b>1º</b><span>semestre de ADS</span></div>
+            <div class="stat"><b>2028</b><span>conclusão prevista</span></div>
+            <div class="stat"><b>Curitiba</b><span>Paraná</span></div>
+          </div>
+          <div class="links push">
             <a class="btn primary" href="mailto:wowkillaz007@gmail.com">Entrar em contato</a>
             <a class="btn" href="https://wa.me/5541995180563" target="_blank" rel="noopener">WhatsApp</a>
           </div>
@@ -344,9 +404,12 @@
         <div class="card-in">
           <p class="tag">sobre</p>
           <h2>Quem sou eu</h2>
-          <p>Sou graduando do 1º semestre de Análise e Desenvolvimento de Sistemas na Universidade Positivo, em formação em lógica de programação e desenvolvimento web front-end (HTML, CSS e JavaScript), com noções iniciais de SQL.</p>
-          <p>Tenho experiência como estagiário de tecnologia em uma instituição de ensino, onde ensinei lógica de programação e C++ a alunos do Ensino Fundamental e Médio. Isso desenvolveu minha comunicação e a clareza ao explicar problemas técnicos.</p>
-          <p>Tenho facilidade de aprendizado, proatividade e gosto de trabalhar em equipe. Busco estágio em desenvolvimento de sistemas para aplicar na prática o que estudo e evoluir profissionalmente.</p>
+          <p class="lead">Estudante de ADS na Universidade Positivo, com foco em lógica de programação e desenvolvimento web.</p>
+          <div class="feats">
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><div><h3>Formação</h3><p>Lógica de programação, HTML, CSS e JavaScript, com noções iniciais de SQL.</p></div></div>
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><div><h3>Experiência</h3><p>Estagiário de tecnologia, ensinando lógica e C++ a alunos do Ensino Fundamental e Médio. Isso desenvolveu minha comunicação e clareza.</p></div></div>
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><div><h3>Objetivo</h3><p>Estágio em desenvolvimento para aplicar na prática o que estudo e evoluir. Aprendo rápido, sou proativo e gosto de trabalhar em equipe.</p></div></div>
+          </div>
         </div>
       </section>
 
@@ -355,14 +418,12 @@
         <div class="card-in">
           <p class="tag">experiência</p>
           <h2>Onde já atuei</h2>
-          <div class="item">
-            <h3>Estagiário de Tecnologia</h3>
-            <div class="org">Instituição de ensino, Curitiba/PR</div>
-            <div class="date">2026</div>
+          <div class="entry">
+            <div class="entry-h"><div><h3>Estagiário de Tecnologia</h3><div class="org">Instituição de ensino, Curitiba/PR</div></div><span class="dpill">2026</span></div>
             <ul>
-              <li>Ministrei aulas de lógica de programação e C++ para turmas do Ensino Fundamental e Médio, adaptando cada conceito ao nível dos alunos.</li>
-              <li>Orientei os alunos em atividades práticas de programação, ajudando a testar o código, encontrar erros e corrigi-los.</li>
-              <li>Apoiei projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
+              <li>Aulas de lógica de programação e C++ para Ensino Fundamental e Médio, adaptando cada conceito ao nível dos alunos.</li>
+              <li>Orientação em atividades práticas: testar o código, encontrar erros e corrigi-los.</li>
+              <li>Apoio a projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
             </ul>
           </div>
         </div>
@@ -373,10 +434,10 @@
         <div class="card-in">
           <p class="tag">projetos</p>
           <h2>O que já construí</h2>
-          <div class="item">
-            <h3>Robótica e Tecnologia Educacional</h3>
-            <div class="date">2026</div>
-            <p>Orientação de alunos em projetos de robótica com Arduino e Micro:bit, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
+          <div class="entry">
+            <div class="entry-h"><div><h3>Robótica e Tecnologia Educacional</h3><div class="org">Projeto escolar</div></div><span class="dpill">2026</span></div>
+            <p>Orientação de alunos em projetos de robótica, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
+            <div class="chips tight"><span class="chip">Arduino</span><span class="chip">Micro:bit</span><span class="chip">Programação</span><span class="chip">Feira escolar</span></div>
           </div>
         </div>
       </section>
@@ -386,17 +447,13 @@
         <div class="card-in">
           <p class="tag">formação</p>
           <h2>Estudos</h2>
-          <div class="item">
-            <h3>Tecnologia em Análise e Desenvolvimento de Sistemas</h3>
-            <div class="org">Universidade Positivo</div>
-            <div class="date">conclusão prevista: 06/2028</div>
-            <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End (HTML, CSS e JavaScript).</p>
+          <div class="entry">
+            <div class="entry-h"><div><h3>Análise e Desenvolvimento de Sistemas</h3><div class="org">Universidade Positivo</div></div><span class="dpill">até 06/2028</span></div>
+            <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End.</p>
           </div>
-          <div class="item">
-            <h3>DIA ANEC PR 2026</h3>
-            <div class="org">Associação Nacional de Educação Católica do Brasil (ANEC)</div>
-            <div class="date">março de 2026</div>
-            <p>Certificado de participação, carga horária de 4h, realizado em Curitiba/PR.</p>
+          <div class="entry">
+            <div class="entry-h"><div><h3>DIA ANEC PR 2026</h3><div class="org">ANEC, Curitiba/PR</div></div><span class="dpill">03/2026</span></div>
+            <p>Certificado de participação, carga horária de 4h.</p>
           </div>
         </div>
       </section>
@@ -406,33 +463,13 @@
         <div class="card-in">
           <p class="tag">habilidades</p>
           <h2>O que eu sei fazer</h2>
-          <div class="skills">
-            <div>
-              <h3>desenvolvimento</h3>
-              <div>Lógica de Programação</div>
-              <div>C++</div>
-              <div>HTML e CSS (em aprendizado)</div>
-              <div>JavaScript (em aprendizado)</div>
-              <div>SQL (noções básicas)</div>
-            </div>
-            <div>
-              <h3>complementares</h3>
-              <div>Didática e comunicação</div>
-              <div>Trabalho em equipe e proatividade</div>
-              <div>Robótica educacional</div>
-              <div>Realidade virtual (Meta Quest 2)</div>
-            </div>
-          </div>
-          <div class="meta">
-            <div>
-              <h3>idiomas</h3>
-              <p>Português — Nativo<br>Inglês — Intermediário</p>
-            </div>
-            <div>
-              <h3>interesses</h3>
-              <p>Tecnologia, games e vôlei.</p>
-            </div>
-          </div>
+          <h3 class="sub">desenvolvimento</h3>
+          <div class="chips tight"><span class="chip">Lógica de programação</span><span class="chip">C++</span><span class="chip">HTML e CSS</span><span class="chip">JavaScript</span><span class="chip">SQL básico</span></div>
+          <h3 class="sub">complementares</h3>
+          <div class="chips tight"><span class="chip soft">Didática e comunicação</span><span class="chip soft">Trabalho em equipe</span><span class="chip soft">Proatividade</span><span class="chip soft">Robótica educacional</span><span class="chip soft">Realidade virtual</span></div>
+          <h3 class="sub">idiomas</h3>
+          <div class="lang"><span>Português</span><div class="bar"><i style="width:100%"></i></div><em>Nativo</em></div>
+          <div class="lang"><span>Inglês</span><div class="bar"><i style="width:62%"></i></div><em>Intermediário</em></div>
         </div>
       </section>
 
@@ -442,12 +479,9 @@
           <p class="tag">contato</p>
           <h2>Vamos conversar?</h2>
           <p>Aberto a estágio, trabalhos como autônomo e contratos por período.</p>
-          <div class="contact-line"><small>e-mail</small><a href="mailto:wowkillaz007@gmail.com">wowkillaz007@gmail.com</a></div>
-          <div class="contact-line"><small>whatsapp</small><a href="https://wa.me/5541995180563" target="_blank" rel="noopener">+55 41 99518-0563</a></div>
-          <div class="contact-line"><small>local</small><span>Boqueirão, Curitiba/PR</span></div>
-          <div class="links" style="margin-top:22px">
-            <a class="btn primary" href="mailto:wowkillaz007@gmail.com">Enviar e-mail</a>
-          </div>
+          <a class="ctile" href="mailto:wowkillaz007@gmail.com"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><div><small>e-mail</small><b>wowkillaz007@gmail.com</b></div></a>
+          <a class="ctile" href="https://wa.me/5541995180563" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-.8.8c-.9-.4-1.6-1.1-2-2l.8-.8-1-2z"/></svg></span><div><small>whatsapp</small><b>+55 41 99518-0563</b></div></a>
+          <div class="ctile"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>local</small><b>Boqueirão, Curitiba/PR</b></div></div>
         </div>
       </section>
 
@@ -459,24 +493,6 @@
 
   <div class="bottom">
     <div class="dots" id="dots"></div>
-  </div>
-  <div class="runner" aria-hidden="true">
-    <svg viewBox="0 0 64 64">
-      <line class="ground" x1="0" y1="60" x2="64" y2="60"/>
-      <g class="bob">
-        <g class="limb l2"><line class="ln" x1="36" y1="44" x2="36" y2="57"/></g>
-        <g class="limb l1"><line class="ln" x1="28" y1="44" x2="28" y2="57"/></g>
-        <rect class="body" x="22" y="26" width="20" height="20" rx="8"/>
-        <path class="code" d="M30 33 l-3 3 l3 3 M34 33 l3 3 l-3 3"/>
-        <line class="ln" x1="32" y1="6" x2="32" y2="3"/>
-        <circle class="eye" cx="32" cy="2" r="2"/>
-        <circle class="head" cx="32" cy="16" r="10"/>
-        <circle class="eye" cx="28" cy="16" r="1.8"/>
-        <circle class="eye" cx="36" cy="16" r="1.8"/>
-        <g class="limb a2"><line class="ln" x1="40" y1="30" x2="40" y2="41"/></g>
-        <g class="limb a1"><line class="ln" x1="24" y1="30" x2="24" y2="41"/></g>
-      </g>
-    </svg>
   </div>
 </main>
 
@@ -517,7 +533,7 @@
     ctx.beginPath();
     for (i = 0; i <= n; i++){ if (i) ctx.lineTo(left[i][0], left[i][1]); else ctx.moveTo(left[i][0], left[i][1]); }
     for (i = n; i >= 0; i--) ctx.lineTo(right[i][0], right[i][1]);
-    ctx.closePath(); ctx.fillStyle = 'rgba(14,30,62,' + a + ')'; ctx.fill();
+    ctx.closePath(); ctx.fillStyle = 'rgba(78,116,178,' + a + ')'; ctx.fill();
   }
 
   function draw(t){
@@ -533,7 +549,7 @@
       /* bolinha de gosma escura */
       var rr = p.r * 1.4 * (near ? 1.5 : 1) * (1 + .12 * Math.sin(t * .002 + i));
       ctx.beginPath(); ctx.arc(p.x, p.y, rr, 0, 6.283);
-      ctx.fillStyle = near ? 'rgba(14,30,62,.9)' : 'rgba(14,30,62,.5)'; ctx.fill();
+      ctx.fillStyle = near ? 'rgba(78,116,178,.85)' : 'rgba(78,116,178,.45)'; ctx.fill();
       ctx.beginPath(); ctx.arc(p.x - rr * .3, p.y - rr * .3, rr * .3, 0, 6.283);
       ctx.fillStyle = 'rgba(157,192,243,.6)'; ctx.fill();
       if (near) gooLink(mouse.x, mouse.y, p.x, p.y, .6*dpr, rr * .8, .18*dpr, .7 * (1 - d / reach), i * .7, t, 1);
@@ -544,7 +560,7 @@
     }
     if (mouse.x > 0){
       ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 2.4*dpr, 0, 6.283);
-      ctx.fillStyle = 'rgba(14,30,62,.9)'; ctx.fill();
+      ctx.fillStyle = 'rgba(78,116,178,.85)'; ctx.fill();
     }
     if (!reduce) requestAnimationFrame(draw);
   }
@@ -563,11 +579,11 @@
   /* ---------- Caixa + cola pegajosa ---------- */
   var box = document.querySelector('.w-box'), arcEl = document.getElementById('arc'), actx = arcEl.getContext('2d');
   var ad = 1, ring = [], RN = 280, rect = null, rad = 16, D = 250, mp = {x:-9999, y:-9999}, active = 0;
-  var K = 56, tends = [], idle = [], k0, massAl = 0, idleAl = 1;
+  var K = 90, tends = [], idle = [], k0, massAl = 0, idleAl = 1;
   for (k0 = 0; k0 < K; k0++) (function(k){
     var brs = [], c = 1 + Math.floor(Math.random() * 5), q;
     for (q = 0; q < c; q++) brs.push({f:.12 + Math.random() * .72, sd:Math.random() < .5 ? -1 : 1, lk:.14 + Math.random() * .3, fr:1 + Math.random() * 1.4, am:.6 + Math.random() * .8, ck:1 + Math.random() * 1.4, w:.4 + Math.random() * .3, ang:.4 + Math.random() * .9, ph:Math.random() * 6.283});
-    tends.push({off:((k + .5) / K * 2 - 1 + (Math.random() - .5) * 3 / K) * 22, ai:null, gr:0, alive:false, ph:Math.random() * 6.283, fr:1.1 + Math.random() * 1.3, sp:.0014 + Math.random() * .002, lag:.018 + Math.random() * .03, lm:.45 + Math.random() * 1.6, side:Math.random() < .5 ? -1 : 1, dev:(Math.random() - .5) * 1.1, bend:1.4 + Math.random() * 1.8, am:.6 + Math.random() * 1, wd:.7 + Math.random() * .6, br:brs});
+    tends.push({off:((k + .5) / K * 2 - 1 + (Math.random() - .5) * 3 / K) * 17, ai:null, gr:0, alive:false, ph:Math.random() * 6.283, fr:1.1 + Math.random() * 1.3, sp:.0014 + Math.random() * .002, lag:.018 + Math.random() * .03, lm:.45 + Math.random() * 1.6, side:Math.random() < .5 ? -1 : 1, dev:(Math.random() - .5) * 1.1, bend:1.4 + Math.random() * 1.8, am:.6 + Math.random() * 1, wd:.7 + Math.random() * .6, br:brs});
   })(k0);
   for (k0 = 0; k0 < 3; k0++) idle.push({i:Math.floor((k0 + .2 + Math.random() * .5) / 3 * RN), ph:Math.random() * 6.283});
 
@@ -662,11 +678,11 @@
     for (i = 0; i <= n; i++){ if (i) actx.lineTo(left[i][0], left[i][1]); else actx.moveTo(left[i][0], left[i][1]); }
     for (i = n; i >= 0; i--) actx.lineTo(right[i][0], right[i][1]);
     actx.closePath();
-    actx.fillStyle = 'rgba(14,30,62,' + a + ')'; actx.fill();
+    actx.fillStyle = 'rgba(78,116,178,' + a + ')'; actx.fill();
     if (gloss){                                           /* brilho de gosma escura */
       actx.beginPath();
       for (i = 2; i <= n - 2; i++){ if (i > 2) actx.lineTo(mid[i][0], mid[i][1]); else actx.moveTo(mid[i][0], mid[i][1]); }
-      actx.strokeStyle = 'rgba(157,192,243,' + (.5 * a) + ')'; actx.lineWidth = .7; actx.lineCap = 'round'; actx.stroke();
+      actx.strokeStyle = 'rgba(157,192,243,' + (.5 * a) + ')'; actx.lineWidth = .45; actx.lineCap = 'round'; actx.stroke();
     }
   }
 
@@ -711,25 +727,26 @@
     tends.forEach(function(T, k){
       items[k] = null;
       if (T.ai === null || T.gr < .02) return;
-      var A = anchorAt(T.ai), n0 = nrm(Math.round(T.ai) % RN), th0 = Math.atan2(n0.y, n0.x) + T.dev;
+      var A = anchorAt(T.ai), n0 = nrm(Math.round(T.ai) % RN), th0;
       var dx = mp.x - A.x, dy = mp.y - A.y, dist = Math.hypot(dx, dy), thC = Math.atan2(dy, dx);
+      th0 = thC + T.dev * .22;
       var Lmax = D * T.lm, L = Math.min(Lmax, dist * 1.02) * T.gr;
       var cw = Math.max(0, Math.min(1, (Lmax - dist) / (Lmax * .12)));
-      var amp = (.12 + .5 * Math.min(1, L / 150)) * T.am, curl = (1 - cw) * 2.4 * T.side, al = Math.min(1, T.gr * 1.6);
-      var hd = [], pts = chain(A, th0, thC, L, 22, t, T.ph, T.fr, T.sp, amp, curl, cw * T.gr * T.gr, mp, hd, T.bend);
+      var amp = (.08 + .26 * Math.min(1, L / 150)) * T.am, curl = (1 - cw) * .3 * T.side, al = Math.min(1, T.gr * 1.6);
+      var hd = [], pts = chain(A, th0, thC, L, 22, t, T.ph, T.fr, T.sp, amp, curl, cw * T.gr * T.gr, mp, hd, T.bend * 2);
       items[k] = {T:T, pts:pts, hd:hd, L:L, al:al};
     });
 
     items.forEach(function(it){
       if (!it) return;
       var T = it.T, pts = it.pts, hd = it.hd, L = it.L, al = it.al;
-      paint(pts, 1.35 * T.wd * Math.min(1, .35 + T.gr), .12, .92 * al, true);
+      paint(pts, 0.34 * T.wd * Math.min(1, .35 + T.gr), .035, .92 * al, true);
       T.br.forEach(function(b){                             /* ramos em posições e tamanhos diferentes */
         var ib = Math.round(22 * b.f), Lb = L * b.lk * (1 - b.f * .5);
         if (Lb < 8) return;
         var th = hd[ib] + b.sd * b.ang;
         var bp = chain(pts[ib], th, th, Lb, 10, t, b.ph, b.fr, T.sp * 1.2, b.am * .9, 1.8 * b.sd * b.ck, 0, null, null);
-        paint(bp, b.w, .07, .85 * al, false);
+        paint(bp, b.w * .3, .025, .85 * al, false);
       });
     });
 
@@ -738,7 +755,7 @@
     if (idleAl > .02){
       idle.forEach(function(it, k){
         var A = ring[it.i % RN], n = nrm(it.i % RN), th = Math.atan2(n.y, n.x), L = 16 + 8 * Math.sin(t * .0017 + it.ph);
-        paint(chain(A, th, th, L, 8, t, it.ph, 1.6, .0025, .9, (k % 2 ? -1 : 1) * .8, 0, null, null), 2, .2, .7 * idleAl, false);
+        paint(chain(A, th, th, L, 8, t, it.ph, 1.6, .0025, .9, (k % 2 ? -1 : 1) * .8, 0, null, null), 1.2, .15, .7 * idleAl, false);
       });
     }
     actx.restore();
@@ -751,40 +768,6 @@
   var stage = document.getElementById('stage'), dotsEl = document.getElementById('dots');
   var cur = 0, N = cards.length;
 
-  /* ornamentos de tentáculos nos cards (gerados uma vez; só o card ativo se mexe) */
-  function rnd(a, b){ return a + Math.random() * (b - a); }
-  function tpath(x, y, L, w, dir, wob, n){
-    var l = [], r = [], th = dir, px = x, py = y, seg = L / n, ph = rnd(0, 6.283), i, u;
-    for (i = 0; i <= n; i++){
-      u = i / n;
-      var h = w * Math.pow(1 - u, 1.3) + .25, nx = -Math.sin(th), ny = Math.cos(th);
-      l.push((px + nx * h).toFixed(1) + ' ' + (py + ny * h).toFixed(1));
-      r.push((px - nx * h).toFixed(1) + ' ' + (py - ny * h).toFixed(1));
-      th = dir + Math.sin(ph + u * 5) * wob * u;
-      px += Math.cos(th) * seg; py += Math.sin(th) * seg;
-    }
-    return 'M' + l.join('L') + 'L' + r.reverse().join('L') + 'Z';
-  }
-  function gooTop(){
-    var d = 'M0 0H560V' + rnd(4, 8).toFixed(1), x, i, out;
-    for (x = 540; x >= 0; x -= 20) d += 'L' + x + ' ' + rnd(3, 10).toFixed(1);
-    d += 'Z';
-    for (i = 0; i < 12; i++) d += tpath(rnd(0, 560), 4, rnd(8, 24), rnd(.6, 1.2), 1.57 + rnd(-.9, .9), rnd(.3, 1), 6);
-    out = '<path d="' + d + '"/>';
-    for (i = 0; i < 9; i++){
-      var L = i < 2 ? rnd(46, 74) : rnd(16, 52);
-      out += '<path class="t" style="animation-delay:' + (-rnd(0, 5)).toFixed(1) + 's" d="' + tpath(rnd(0, 560), 5, L, rnd(1.1, 2.6), 1.57 + rnd(-.45, .45), rnd(.2, .9), 10) + '"/>';
-    }
-    return '<svg class="goo-svg goo-top" viewBox="0 0 560 78" preserveAspectRatio="xMidYMin slice" aria-hidden="true">' + out + '</svg>';
-  }
-  function gooBot(){
-    var d = 'M0 30H560V' + (30 - rnd(3, 7)).toFixed(1), x, i;
-    for (x = 540; x >= 0; x -= 20) d += 'L' + x + ' ' + (30 - rnd(2, 9)).toFixed(1);
-    d += 'Z';
-    for (i = 0; i < 12; i++) d += tpath(rnd(0, 560), 27, rnd(6, 24), rnd(.7, 1.6), -1.57 + rnd(-.6, .6), rnd(.3, .9), 6);
-    return '<svg class="goo-svg goo-bot" viewBox="0 0 560 30" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path d="' + d + '"/></svg>';
-  }
-  cards.forEach(function(c){ c.insertAdjacentHTML('afterbegin', gooTop() + gooBot()); });
   document.getElementById('tot').textContent = pad(N);
   function pad(n){ return (n < 10 ? '0' : '') + n; }
 
