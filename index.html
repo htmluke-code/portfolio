@@ -581,6 +581,11 @@
   function dropTouch(e){ if (e.pointerType !== 'mouse'){ mouse.x = -999; mouse.y = -999; } }
   addEventListener('pointerup', dropTouch);
   addEventListener('pointercancel', dropTouch);
+  /* toque direto (alguns celulares não enviam pointermove ao arrastar) */
+  function touchMouse(e){ var t = e.touches && e.touches[0]; if (t){ mouse.x = t.clientX*dpr; mouse.y = t.clientY*dpr; } }
+  addEventListener('touchstart', touchMouse, {passive:true});
+  addEventListener('touchmove', touchMouse, {passive:true});
+  addEventListener('touchend', function(e){ if (!e.touches.length){ mouse.x = -999; mouse.y = -999; } }, {passive:true});
   document.documentElement.addEventListener('mouseleave', function(){ mouse.x = -999; mouse.y = -999; });
 
   /* ligação orgânica: grossa nas pontas, fina no meio, balançando como gosma */
@@ -668,6 +673,12 @@
   function dropMp(e){ if (e.pointerType !== 'mouse'){ mp.x = mp.y = -9999; } }
   addEventListener('pointerup', dropMp);
   addEventListener('pointercancel', dropMp);
+  function touchMp(e){ var t = e.touches && e.touches[0]; if (t){ mp.x = t.clientX; mp.y = t.clientY; } }
+  addEventListener('touchstart', touchMp, {passive:true});
+  addEventListener('touchmove', touchMp, {passive:true});
+  addEventListener('touchend', function(e){ if (!e.touches.length){ mp.x = mp.y = -9999; } }, {passive:true});
+  /* na tela de entrada o arrasto não rola a página: só move os tentáculos */
+  document.getElementById('welcome').addEventListener('touchmove', function(e){ e.preventDefault(); }, {passive:false});
   document.documentElement.addEventListener('mouseleave', function(){ mp.x = mp.y = -9999; });
 
   function buildRing(){
