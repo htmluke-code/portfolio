@@ -403,6 +403,10 @@
   a.ctile:hover{background:#fff;}
   a.ctile:hover::after{color:#24457A; transform:translate(2px,-55%);}
   .dot.on{background:#24457A;}
+
+  /* ===== Toque: o dedo arrastado funciona como o cursor ===== */
+  #welcome{touch-action:none;}
+  #app, #bg{touch-action:pan-y;}
 </style>
 </head>
 <body>
@@ -571,7 +575,12 @@
     }
   }
   addEventListener('resize', resize); resize();
-  addEventListener('pointermove', function(e){ mouse.x = e.clientX*dpr; mouse.y = e.clientY*dpr; });
+  function setMouse(e){ mouse.x = e.clientX*dpr; mouse.y = e.clientY*dpr; }
+  addEventListener('pointermove', setMouse);
+  addEventListener('pointerdown', setMouse);
+  function dropTouch(e){ if (e.pointerType !== 'mouse'){ mouse.x = -999; mouse.y = -999; } }
+  addEventListener('pointerup', dropTouch);
+  addEventListener('pointercancel', dropTouch);
   document.documentElement.addEventListener('mouseleave', function(){ mouse.x = -999; mouse.y = -999; });
 
   /* ligação orgânica: grossa nas pontas, fina no meio, balançando como gosma */
@@ -631,6 +640,7 @@
     setTimeout(function(){ welcome.style.display = 'none'; }, 1300);
   }
   var enterBox = document.getElementById('enter');
+  if (matchMedia('(hover:none)').matches) document.querySelector('.w-hint').textContent = 'Toque em BEM-VINDO para entrar';
   enterBox.addEventListener('click', enter);
   addEventListener('keydown', function(e){ if (!opened && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); enter(); } });
 
@@ -652,7 +662,12 @@
     rect = null;
   }
   addEventListener('resize', sizeArc); sizeArc();
-  addEventListener('pointermove', function(e){ mp.x = e.clientX; mp.y = e.clientY; });
+  function setMp(e){ mp.x = e.clientX; mp.y = e.clientY; }
+  addEventListener('pointermove', setMp);
+  addEventListener('pointerdown', setMp);
+  function dropMp(e){ if (e.pointerType !== 'mouse'){ mp.x = mp.y = -9999; } }
+  addEventListener('pointerup', dropMp);
+  addEventListener('pointercancel', dropMp);
   document.documentElement.addEventListener('mouseleave', function(){ mp.x = mp.y = -9999; });
 
   function buildRing(){
