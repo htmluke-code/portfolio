@@ -349,6 +349,60 @@
     .w-seja,.w-title,.w-sub,.w-btn,.w-hint{opacity:1;}
     .w-box{opacity:1;}
   }
+
+  /* ===== BEM-VINDO vira o botão de entrar ===== */
+  .w-box{cursor:pointer; overflow:hidden; transition:transform .5s cubic-bezier(.22,.9,.26,1), box-shadow .5s;}
+  .w-box:hover, .w-box:focus-visible{transform:translateY(-2px); box-shadow:0 22px 54px rgba(36,69,122,.24); outline:none;}
+  .wt{display:inline-block; transition:transform .55s cubic-bezier(.22,.9,.26,1), opacity .4s;}
+  .w-go{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:.5em;
+    font-family:var(--font); font-weight:800; font-size:clamp(22px,4vw,40px); letter-spacing:.22em; text-indent:.22em; color:#2B4D86;
+    transform:translateY(110%); opacity:0; transition:transform .55s cubic-bezier(.22,.9,.26,1), opacity .4s; z-index:2;}
+  .w-go svg{width:.8em; height:.8em; transition:transform .4s;}
+  .w-box:hover .wt, .w-box:focus-visible .wt{transform:translateY(-110%); opacity:0;}
+  .w-box:hover .w-go, .w-box:focus-visible .w-go{transform:none; opacity:1;}
+  .w-box:hover .w-go svg{transform:translateX(4px);}
+  .w-hint{margin-top:26px;}
+  @media (hover:none){ .w-hint{font-weight:600;} }
+
+  /* ===== Cards modernos ===== */
+  .stage{counter-reset:card;}
+  .card{counter-increment:card; border-radius:24px; border:1px solid rgba(36,69,122,.1);
+    background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(246,249,255,.97));
+    box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 2px 6px rgba(22,49,95,.05), 0 24px 60px -18px rgba(22,49,95,.28);}
+  .card.active{border-color:rgba(36,69,122,.18); box-shadow:0 1px 0 #fff inset, 0 2px 8px rgba(22,49,95,.06), 0 34px 80px -20px rgba(22,49,95,.36);}
+  .card::before{left:0; right:0; width:auto; height:3px; border-radius:0; background:linear-gradient(90deg,#24457A,#4E74B2 45%,#9DC0F3);}
+  .card-in{padding:40px 32px 26px; position:relative;}
+  .card h2{font-size:clamp(22px,3vw,27px); font-weight:800; letter-spacing:-.025em; margin-bottom:14px;}
+  .card h1{font-weight:800; letter-spacing:-.035em;}
+  .card .lead{color:#3A5A90; font-size:15.5px; line-height:1.65; margin-bottom:16px;}
+  .tag{display:inline-flex; gap:8px; color:#4E74B2; font-size:10.5px; letter-spacing:.16em; margin-bottom:14px;}
+  .tag::before{content:""; width:6px; height:6px; border-radius:2px; background:#4E74B2; transform:rotate(45deg);}
+  .tag::after{display:none;}
+  .feat,.entry,.stat,.ctile{background:#F4F8FE; border:1px solid rgba(36,69,122,.07); border-radius:16px; transition:transform .3s, border-color .3s, box-shadow .3s, background .3s;}
+  .feat:hover,.entry:hover{background:#fff; border-color:rgba(78,116,178,.3); box-shadow:0 10px 24px -12px rgba(22,49,95,.25); transform:translateY(-1px);}
+  .feat{padding:14px 16px; gap:14px;}
+  .ico{width:38px; height:38px; border-radius:12px; background:linear-gradient(145deg,#24457A,#4E74B2); box-shadow:0 6px 14px -6px rgba(36,69,122,.6);}
+  .ico svg{stroke:#fff;}
+  .entry{padding:18px 18px 14px; position:relative;}
+  .entry h3{font-size:15.5px; font-weight:700;}
+  .dpill{background:#fff; border:1px solid rgba(36,69,122,.14); color:#24457A; font-weight:700;}
+  .entry li::marker{color:#4E74B2;}
+  .chip{background:#fff; border:1px solid rgba(36,69,122,.16); color:#24457A; font-weight:600; font-size:11.5px; padding:6px 12px;}
+  .chip.soft{background:#F4F8FE; border-color:rgba(36,69,122,.08); font-weight:500;}
+  .chips .chip:hover{border-color:#4E74B2;}
+  .stat{padding:14px 12px 12px; text-align:left;}
+  .stat b{font-size:21px; color:#16315F;}
+  .stat span{font-size:11px; letter-spacing:.02em;}
+  .pill{background:#E9F6EF; border-color:rgba(62,142,107,.25); color:#2D6E52;}
+  .btn{border-radius:12px; font-weight:700;}
+  .btn.primary{background:linear-gradient(145deg,#24457A,#3A62A4); box-shadow:0 10px 22px -10px rgba(36,69,122,.7);}
+  .sub{margin-top:14px !important; margin-bottom:2px;}
+  .bar{height:7px; background:rgba(36,69,122,.08);}
+  .ctile{position:relative; padding:12px 44px 12px 14px;}
+  a.ctile::after{content:"\2197"; position:absolute; right:16px; top:50%; transform:translateY(-50%); color:#8AA0C4; font-size:15px; transition:color .3s, transform .3s;}
+  a.ctile:hover{background:#fff;}
+  a.ctile:hover::after{color:#24457A; transform:translate(2px,-55%);}
+  .dot.on{background:#24457A;}
 </style>
 </head>
 <body>
@@ -363,19 +417,16 @@
   <canvas id="arc"></canvas>
   <div class="w-content">
     <p class="w-seja">SEJA</p>
-    <div class="w-box"><h1 class="w-title">BEM-VINDO</h1></div>
-    <button class="w-btn" id="enter">
-      <span class="w-btn-t">Entrar</span>
-      <span class="w-btn-a" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </button>
-    <div class="w-hint">ou pressione Enter</div>
+    <div class="w-box" id="enter" role="button" tabindex="0" aria-label="Entrar no portfólio"><h1 class="w-title"><span class="wt">BEM-VINDO</span></h1><span class="w-go" aria-hidden="true">ENTRAR<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    
+    <div class="w-hint">Clique para entrar ou pressione Enter</div>
   </div>
 </div>
 
 <!-- PORTFÓLIO INTERATIVO -->
 <main id="app">
   <div class="top">
-    <div class="brand">Bem-vindo ao meu portfólio</div>
+    <div class="brand">Luciano Silva · Portfólio</div>
     <div class="counter"><b id="cur">01</b> / <span id="tot">07</span></div>
   </div>
 
@@ -387,7 +438,7 @@
         <div class="card-in">
           <div class="pill"><i></i>Disponível para oportunidades</div>
           <h1>Olá, eu sou o <span class="grad">Luciano</span>.</h1>
-          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas em Curitiba, em busca de oportunidades na área de TI.</p>
+          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas, em busca da minha primeira oportunidade na área de TI.</p>
           <div class="chips">
             <span class="chip">Estágio</span>
             <span class="chip">Trabalho autônomo</span>
@@ -410,11 +461,11 @@
         <div class="card-in">
           <p class="tag">sobre</p>
           <h2>Quem sou eu</h2>
-          <p class="lead">Estudante de ADS na Universidade Positivo, com foco em lógica de programação e desenvolvimento web.</p>
+          <p class="lead">Estou começando na área de desenvolvimento, com foco em lógica de programação e desenvolvimento web.</p>
           <div class="feats">
-            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><div><h3>Formação</h3><p>Lógica de programação, HTML, CSS e JavaScript, com noções iniciais de SQL.</p></div></div>
-            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><div><h3>Experiência</h3><p>Estagiário de tecnologia, ensinando lógica e C++ a alunos do Ensino Fundamental e Médio. Isso desenvolveu minha comunicação e clareza.</p></div></div>
-            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><div><h3>Objetivo</h3><p>Estágio em desenvolvimento para aplicar na prática o que estudo e evoluir. Aprendo rápido, sou proativo e gosto de trabalhar em equipe.</p></div></div>
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><div><h3>Aprendizado</h3><p>Coloco em prática o que estudo criando projetos próprios, sempre buscando entender como as coisas funcionam.</p></div></div>
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><div><h3>Comunicação</h3><p>Ensinar programação em sala de aula me ensinou a explicar ideias técnicas de forma clara e simples.</p></div></div>
+            <div class="feat"><span class="ico"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><div><h3>Objetivo</h3><p>Um estágio em desenvolvimento onde eu possa contribuir desde o início e crescer junto com a equipe.</p></div></div>
           </div>
         </div>
       </section>
@@ -428,8 +479,8 @@
             <div class="entry-h"><div><h3>Estagiário de Tecnologia</h3><div class="org">Instituição de ensino, Curitiba/PR</div></div><span class="dpill">2026</span></div>
             <ul>
               <li>Aulas de lógica de programação e C++ para Ensino Fundamental e Médio, adaptando cada conceito ao nível dos alunos.</li>
-              <li>Orientação em atividades práticas: testar o código, encontrar erros e corrigi-los.</li>
-              <li>Apoio a projetos de robótica educacional (Arduino e Micro:bit) e atividades com realidade virtual (Meta Quest 2).</li>
+              <li>Acompanhamento dos alunos nas atividades práticas: testar o código, encontrar erros e corrigi-los.</li>
+              <li>Apoio em aulas práticas com robótica e realidade virtual.</li>
             </ul>
           </div>
         </div>
@@ -442,8 +493,8 @@
           <h2>O que já construí</h2>
           <div class="entry">
             <div class="entry-h"><div><h3>Robótica e Tecnologia Educacional</h3><div class="org">Projeto escolar</div></div><span class="dpill">2026</span></div>
-            <p>Orientação de alunos em projetos de robótica, incluindo a programação dos dispositivos, para apresentação em feira escolar.</p>
-            <div class="chips tight"><span class="chip">Arduino</span><span class="chip">Micro:bit</span><span class="chip">Programação</span><span class="chip">Feira escolar</span></div>
+            <p>Orientei alunos do Ensino Fundamental e Médio na montagem e programação de robôs, apresentados na feira de robótica da escola.</p>
+            <div class="chips tight"><span class="chip">Robótica</span><span class="chip">Programação</span><span class="chip">Orientação de alunos</span><span class="chip">Apresentação</span></div>
           </div>
         </div>
       </section>
@@ -454,12 +505,12 @@
           <p class="tag">formação</p>
           <h2>Estudos</h2>
           <div class="entry">
-            <div class="entry-h"><div><h3>Análise e Desenvolvimento de Sistemas</h3><div class="org">Universidade Positivo</div></div><span class="dpill">até 06/2028</span></div>
-            <p>Cursando o 1º semestre. Foco atual: Raciocínio Computacional e Lógica e Desenvolvimento Web Front-End.</p>
+            <div class="entry-h"><div><h3>Análise e Desenvolvimento de Sistemas</h3><div class="org">Universidade Positivo</div></div><span class="dpill">2026 – 2028</span></div>
+            <p>Disciplinas atuais: Raciocínio Computacional e Lógica, e Desenvolvimento Web Front-End.</p>
           </div>
           <div class="entry">
             <div class="entry-h"><div><h3>DIA ANEC PR 2026</h3><div class="org">ANEC, Curitiba/PR</div></div><span class="dpill">03/2026</span></div>
-            <p>Certificado de participação, carga horária de 4h.</p>
+            <p>Evento sobre educação, com certificado de participação (4h).</p>
           </div>
         </div>
       </section>
@@ -472,7 +523,7 @@
           <h3 class="sub">desenvolvimento</h3>
           <div class="chips tight"><span class="chip">Lógica de programação</span><span class="chip">C++</span><span class="chip">HTML e CSS</span><span class="chip">JavaScript</span><span class="chip">SQL básico</span></div>
           <h3 class="sub">complementares</h3>
-          <div class="chips tight"><span class="chip soft">Didática e comunicação</span><span class="chip soft">Trabalho em equipe</span><span class="chip soft">Proatividade</span><span class="chip soft">Robótica educacional</span><span class="chip soft">Realidade virtual</span></div>
+          <div class="chips tight"><span class="chip soft">Didática</span><span class="chip soft">Trabalho em equipe</span><span class="chip soft">Proatividade</span><span class="chip soft">Resolução de problemas</span><span class="chip soft">Organização</span></div>
           <h3 class="sub">idiomas</h3>
           <div class="lang"><span>Português</span><div class="bar"><i style="width:100%"></i></div><em>Nativo</em></div>
           <div class="lang"><span>Inglês</span><div class="bar"><i style="width:62%"></i></div><em>Intermediário</em></div>
@@ -484,7 +535,7 @@
         <div class="card-in">
           <p class="tag">contato</p>
           <h2>Vamos trabalhar juntos?</h2>
-          <p>Aberto a estágio, trabalhos como autônomo e contratos por período.</p>
+          <p>Se o meu perfil combina com a sua vaga ou projeto, será um prazer conversar.</p>
           <a class="ctile" href="https://mail.google.com/mail/?view=cm&fs=1&to=wowkillaz007@gmail.com&su=Oportunidade%20-%20Contato%20pelo%20portf%C3%B3lio" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><div><small>e-mail</small><b>wowkillaz007@gmail.com</b></div></a>
           <a class="ctile" href="https://wa.me/5541995180563" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-.8.8c-.9-.4-1.6-1.1-2-2l.8-.8-1-2z"/></svg></span><div><small>whatsapp</small><b>+55 41 99518-0563</b></div></a>
           <div class="ctile"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>local</small><b>Curitiba / PR</b></div></div>
@@ -579,17 +630,18 @@
     welcome.classList.add('open'); app.classList.add('on');
     setTimeout(function(){ welcome.style.display = 'none'; }, 1300);
   }
-  document.getElementById('enter').addEventListener('click', enter);
+  var enterBox = document.getElementById('enter');
+  enterBox.addEventListener('click', enter);
   addEventListener('keydown', function(e){ if (!opened && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); enter(); } });
 
   /* ---------- Caixa + cola pegajosa ---------- */
   var box = document.querySelector('.w-box'), arcEl = document.getElementById('arc'), actx = arcEl.getContext('2d');
   var ad = 1, ring = [], RN = 280, rect = null, rad = 16, D = 250, mp = {x:-9999, y:-9999}, active = 0;
-  var K = 62, tends = [], idle = [], k0, massAl = 0, idleAl = 1;
+  var K = 36, tends = [], idle = [], k0, massAl = 0, idleAl = 1;
   for (k0 = 0; k0 < K; k0++) (function(k){
-    var brs = [], c = 1 + Math.floor(Math.random() * 5), q;
+    var brs = [], c = Math.floor(Math.random() * 3), q;
     for (q = 0; q < c; q++) brs.push({f:.12 + Math.random() * .72, sd:Math.random() < .5 ? -1 : 1, lk:.14 + Math.random() * .3, fr:1 + Math.random() * 1.4, am:.6 + Math.random() * .8, ck:1 + Math.random() * 1.4, w:.4 + Math.random() * .3, ang:.4 + Math.random() * .9, ph:Math.random() * 6.283});
-    tends.push({off:((k + .5) / K * 2 - 1 + (Math.random() - .5) * 3 / K) * 30, ai:null, gr:0, alive:false, ph:Math.random() * 6.283, fr:1.1 + Math.random() * 1.3, sp:.0014 + Math.random() * .002, lag:.018 + Math.random() * .03, lm:.45 + Math.random() * 1.6, side:Math.random() < .5 ? -1 : 1, dev:(Math.random() - .5) * 1.1, bend:1.4 + Math.random() * 1.8, am:.6 + Math.random() * 1, wd:.7 + Math.random() * .6, br:brs});
+    tends.push({off:((k + .5) / K * 2 - 1 + (Math.random() - .5) * 3 / K) * 14, ai:null, gr:0, alive:false, ph:Math.random() * 6.283, fr:1.1 + Math.random() * 1.3, sp:.0014 + Math.random() * .002, lag:.018 + Math.random() * .03, lm:.45 + Math.random() * 1.6, side:Math.random() < .5 ? -1 : 1, dev:(Math.random() - .5) * .45, bend:1.4 + Math.random() * 1.8, am:.6 + Math.random() * 1, wd:.7 + Math.random() * .6, br:brs});
   })(k0);
   for (k0 = 0; k0 < 3; k0++) idle.push({i:Math.floor((k0 + .2 + Math.random() * .5) / 3 * RN), ph:Math.random() * 6.283});
 
@@ -705,7 +757,7 @@
     }
     var outside = !(mp.x > rect.l && mp.x < rect.r && mp.y > rect.t && mp.y < rect.b);
     active = (outside && !gone) ? Math.max(0, 1 - best / D) : 0;
-    var maxOff = 34, live = 0;
+    var maxOff = 16, live = 0;
 
     tends.forEach(function(T){
       if (gone){ T.gr = 0; T.ai = null; T.alive = false; return; }
@@ -738,7 +790,7 @@
       th0 = thC + T.dev * 1.0;
       var Lmax = D * T.lm, L = Math.min(Lmax, dist * 1.02) * T.gr;
       var cw = Math.max(0, Math.min(1, (Lmax - dist) / (Lmax * .12)));
-      var amp = (.24 + .62 * Math.min(1, L / 150)) * T.am, curl = (1 - cw) * 1.9 * T.side, al = Math.min(1, T.gr * 1.6);
+      var amp = (.14 + .34 * Math.min(1, L / 150)) * T.am, curl = (1 - cw) * .9 * T.side, al = Math.min(1, T.gr * 1.6);
       var hd = [], pts = chain(A, th0, thC, L, 22, t, T.ph, T.fr, T.sp, amp, curl, cw * T.gr * T.gr, mp, hd, T.bend * 1.2);
       items[k] = {T:T, pts:pts, hd:hd, L:L, al:al};
     });
@@ -746,9 +798,9 @@
     items.forEach(function(it){
       if (!it) return;
       var T = it.T, pts = it.pts, hd = it.hd, L = it.L, al = it.al;
-      paint(pts, 1.05 * T.wd * Math.min(1, .35 + T.gr), .1, .92 * al, true);
+      paint(pts, .9 * T.wd * Math.min(1, .35 + T.gr), .1, .92 * al, true);
       T.br.forEach(function(b){                             /* ramos em posições e tamanhos diferentes */
-        var ib = Math.round(22 * b.f), Lb = L * b.lk * (1 - b.f * .5);
+        var ib = Math.round(22 * b.f), Lb = L * b.lk * .6 * (1 - b.f * .5);
         if (Lb < 8) return;
         var th = hd[ib] + b.sd * b.ang;
         var bp = chain(pts[ib], th, th, Lb, 10, t, b.ph, b.fr, T.sp * 1.2, b.am * .9, 1.8 * b.sd * b.ck, 0, null, null);
